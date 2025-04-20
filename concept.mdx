@@ -1,0 +1,32 @@
+---
+title: 'Concept'
+description: 'Core EAP Concept'
+---
+
+## Concept
+
+<img
+  style={{ borderRadius: '0.5rem' }}
+  src="images/concept.png"
+/>
+
+
+| 概念 | 关键要素 | 作用与交互 |
+|------|----------|-----------|
+| **Work Domain** | - 领域标签（Coding、Consulting …）<br />- 绑定 *Playbook* | 定义同类型工作的业务上下文，使知识、流程与工具在域内复用 |
+| **Playbook** | 1. **Work Process**：结构化 SOP / 流程图 <br />2. **Worker Roles**：Agent / Human 职责矩阵 <br />3. **Work Tools**：API、插件、外部系统 <br />4. **Work Material**：输入 / 输出 Artifacts | 域内“作战手册”，为 WBS 生成与执行提供模板 |
+| **Work（实例）** | - 业务需求（“Build a website”）<br />- 归属 Work Domain | 触发 *Playbook* → 生成 **WBS** |
+| **WBS** | - 分层任务树<br />- 动态可增减节点 | 随执行反馈自动重构；每节点追踪状态、负责人、依赖 |
+| **Work Engine** | - 调度器：分派 Agent / Human<br />- 执行 Loop：Plan → Act → Review → Adjust | 负责实际运行 WBS；发现阻塞时生成新 Task/子分支 |
+| **ROI 模型** | **Cost**：LLM Token、工具调用、人工/Agent 运行时、物料成本<br />**Value**：可交付成果（App、报告…）、业务 KPI | 为每个 *Work* 持续计算 Investment vs. Generated Value；支持优先级与资源分配 |  
+
+
+## Core Flow
+
+1. **Create Work** → 选择 / 匹配 **Work Domain**  
+2. 读取该 Domain 的 **Playbook** → 自动生成初始 **WBS**  
+3. **Work Engine** 调度 *Worker Roles*（Human + Agent）执行节点  
+4. 执行循环  
+   - 节点完成 / 失败 → 更新状态，可能派生子任务  
+   - 收集 Cost & Value → 更新 **ROI Dashboard**  
+5. **Governance**：当 ROI < 阈值或风险超限时，Human Loop 介入决策  

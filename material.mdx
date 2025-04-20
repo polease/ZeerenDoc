@@ -1,0 +1,142 @@
+---
+title: Resources
+description:  
+---
+ 
+# 📦 EAP – **Resource** Structure Design  
+
+> This page describes how **resources** (input/output artifacts and supporting references) are organized across the workflow stages of the **Coding Work Domain** in the Enterprise Agent Platform (EAP).
+
+---
+
+## 📘 Overview
+
+Every **Work Domain** in EAP owns a structured **Resource Tree**, listing everything a team needs (or produces) during the lifecycle of a Work.  
+For the **Coding Domain**, resources are grouped into six major stages:
+
+1. **Problem Definition**  
+2. **Business Context & Value‑Chain Discovery (As‑Is)**  
+3. **New Experience & Business Capability Design (To‑Be)**  
+4. **Product Design**  
+5. **Build & Test**  
+6. **Integration & Acceptance**
+
+
+## 📂 External & Supporting Resources
+
+In addition to project‑generated items, a Work can link to **supporting resources** such as:
+
+- SDK reference documents  
+- Corporate development or UI/UX guidelines  
+- Internal asset libraries (icons, component kits, code snippets)  
+- Third‑party compliance, security, or performance standards  
+- Knowledge‑base articles, wikis, or white papers  
+
+These references live alongside project resources in the same tree, ensuring one‑stop access to everything relevant.
+
+---
+
+## 🗄️ Storage Channels & Providers
+
+| Channel | Examples | Notes |
+|---------|----------|-------|
+| **EAP Store** | Native version‑controlled repository | Best for structured project docs |
+| **Local File** | Developer laptop, shared drive | Auto‑synced via EAP agent |
+| **HTTP / Cloud Object** | Public URLs, S3, Azure Blob | Read‑only or read‑write |
+| **Database** | PostgreSQL, Neo4j, MongoDB | Programmatic access by agents |
+| **Other Services** | Confluence, Git, SharePoint | Linked as provider‑specific nodes |
+
+All channels are abstracted behind a **provider** interface so they can be browsed uniformly and aggregated into a single Resource Tree.
+
+---
+
+## 🌲 Resource Tree Example (Coding Domain)
+
+```text
+Coding Work (root)
+├── 1_Problem_Definition
+│   ├── Problem_Statement.md
+│   └── Vision.md
+├── 2_AsIs_Discovery
+│   ├── Business_Context.pdf
+│   ├── Value_Chain.vsdx
+│   └── Guest_Journey.png
+├── 3_ToBe_Design
+│   ├── New_Business_Flow.drawio
+│   ├── Gap_Analysis.xlsx
+│   └── UX_Concept.pptx
+├── 4_Product_Design
+│   ├── UI_Detail_Design.fig
+│   ├── Feature_Tree.json
+│   ├── NFRs.yml
+│   └── Data_Requirements.sql
+├── 5_Build_Test
+│   ├── Project_Tree/
+│   ├── Interface_List.csv
+│   └── Test_Case_Tree/
+├── 6_Integration_Acceptance
+│   ├── E2E_Test_Cases.xlsx
+│   └── Test_Report.pdf
+└── 🌐_External_Supporting
+    ├── SDK_Reference/             (http)
+    ├── Internal_Guidelines/       (SharePoint)
+    └── Asset_Library/             (EAP Store)
+
+```
+---
+
+## 🧭 Stage 1: Problem Definition
+
+- `🧩 Problem Statement`  
+- `🌟 Vision`
+
+---
+
+## 🌐 Stage 2: Business Context & Value‑Chain Discovery (As‑Is)
+
+- `🏢 Business Context`  
+- `🔁 Business Flow & Value Chain`  
+- `🛣️ Guest Journey & Pain Points`  
+- `📦 Existing Asset Inventory`
+
+---
+
+## 🚀 Stage 3: New Experience & Business Capability Design (To‑Be)
+
+- `🆕 New Business Flow`  
+- `⚖️ Gap Analysis`  
+- `🎨 User Experience Concept`  
+- `🧪 Product Concept`  
+- `📊 Data Concept`
+
+---
+
+## 🛠️ Stage 4: Product Design
+
+- `🖼️ UI Detail Design`  
+- `🌳 Feature Tree`  
+- `📏 Non‑Functional Requirements (NFRs)`  
+- `🗃️ Data Requirements`  
+- `📄 Interface & Contract Docs`  
+- `🧰 Tech‑Stack & Tool‑Chain Requirements`
+
+---
+
+## 🔧 Stage 5: Build & Test
+
+- `🗂️ Project Tree / Module Map`  
+- `📑 Data List`  
+- `🔌 Interface List`  
+- `💾 Storage & Database List`  
+- `🧾 Coding Standards`  
+- `🧪 Test Case Tree`
+
+---
+
+## ✅ Stage 6: Integration & Acceptance
+
+- `🧪 End‑to‑End Test Cases`  
+- `📈 Test Results`  
+- `📝 Test Report`
+
+---
