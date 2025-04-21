@@ -1,0 +1,80 @@
+# 👷 EAP - Worker & Agent Architecture
+
+In the EAP (Enterprise Agent Platform), **Workers** are the core executors of tasks.  
+They can be either **Human Workers** or **Agent Workers**, working collaboratively within a Work Breakdown Structure (WBS).
+
+---
+
+## 🧑‍💼 What is a Worker?
+
+A **Worker** is an assigned executor of a task node in the WBS. Each Worker may represent:
+
+- A **Human**, such as a real developer or product manager
+- An **Agent**, powered by large language models (LLMs), with autonomous reasoning and tool usage capabilities
+
+---
+
+## 👥 Worker Types
+
+### 1. 🤖 Agent Worker
+
+Represents an AI agent, abstracted by role and skill, backed by a specific LLM.
+
+#### ✅ Attributes:
+- `name`: e.g., `Senior Developer Agent`
+- `title`: e.g., `LLM Code Engineer`
+- `llm_provider`: e.g., `OpenAI GPT-4`, `DeepSeek-V2`, `Claude`, etc.
+- `work_skills`: list of skills (e.g., `frontend coding`, `API integration`, `unit testing`)
+- `agent_type`: `AgentWorker`
+
+### 2. 🧑 Human Worker
+
+Represents a real human contributor, who performs tasks manually or through a user interface.
+
+#### ✅ Attributes:
+- `name`: e.g., `Alice Zhang`
+- `title`: e.g., `Senior Frontend Developer`
+- `role`: e.g., `Tester`, `Project Manager`, `Junior Developer`
+- `worker_type`: `HumanWorker`
+
+---
+
+## 🏗️ Example Worker Roles
+
+Workers in a domain (e.g., Coding) may include:
+
+- `Project Manager`
+- `Developer`
+  - `Junior Developer`
+  - `Senior Developer`
+- `Tester`
+  - `Junior Tester`
+  - `Senior Tester`
+
+Each of the above roles can be implemented as either **Human** or **Agent Worker** depending on the context or availability.
+
+---
+
+## ⚙️ Workerization
+
+In a **Workerization** context, a team (virtual or hybrid) includes multiple Workers of different types and roles, dynamically composed to execute a specific Work instance.
+
+```plaintext
+Workerization: "Build a Web App"
+├── 👨‍💼 Project Manager (Human)
+├── 🤖 Senior Developer (Agent)
+├── 👩‍💻 Junior Developer (Human)
+└── 🤖 Tester Agent (Agent)
+🧠 From Agent Worker → Action Agent
+An Agent Worker is an abstract role. During actual execution, it is instantiated as an Action Agent.
+
+📌 What is an Action Agent?
+An Action Agent is a concrete instance that includes:
+
+
+Attribute	Description
+system_message	Prompt instructions and role settings
+llm_backend	Underlying LLM engine (e.g., gpt-4o, deepseek-coder, etc.)
+input_schema	Expected input format / fields
+output_schema	Response structure / contract
+tools_allowed	List of tools this agent can call (e.g., browser, API, code runner)
