@@ -20,18 +20,16 @@
               "concept",
               "material",
               "worker",
-              "process"
+              "process",
+              "tools",
+              "WBS",
+              "task"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Technical",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "tech"
             ]
           }
         ]

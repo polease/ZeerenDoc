@@ -1,0 +1,62 @@
+## WBS 概念
+
+ **Work Domain**的. **Playbook**  **Work Process 文档**作为DNA，
+ **WBS（Work Breakdown Structure）任务树**作为RNA来驱动实际执行。
+
+- **WBS 任务节点属性**  
+  - **名称 & 描述**：传统任务名称、简要说明  
+  - **执行者**：指定的 AI Agent 或 Agent Worker  
+  - **输入**：输入的Resource
+  - **步骤 & 输出**：任务具体步骤以及交付成果   
+  - **依赖项**：前置任务  
+  - **时间**：开始时间、结束时间  
+  - **状态**：待启动／进行中／已完成／阻塞  
+
+- **宏观 vs 微观**  
+  - **Master Plan**（宏观层面）  
+    - 从整体 Work Process 自动生成  
+    - 覆盖所有阶段，给出初阶任务列表  
+  - **Micro Plan**（微观层面）  
+    - 针对每个阶段或具体 Master Plan 条目生成  
+    - 以更细粒度任务树形式 attach 到 Master Plan  
+
+- **生物学类比**  
+  - **Work Process = DNA**：定义全局流程与基因序列  
+  - **Micro Plan = RNA**：从“DNA”转录而来，驱动具体执行  
+  - **Agent Instance**：每个微观任务对应的 Agent 执行上下文／指令  
+
+---
+
+## WBS 流程
+
+1. **输入阶段**  
+   - 从 Playbook 中提取对应 Work Process 文档  
+   - 解析各阶段、里程碑、关键交付物  
+
+2. **生成 Master Plan**  
+   - 按宏观层面拆解为一棵初阶 WBS 任务树  
+   - 每个任务附带名称、描述、负责人、阶段、预计周期  
+
+3. **生成 Micro Plan**  
+   - 针对 Master Plan 中的单个任务或阶段  
+   - 细化成更小颗粒度的子任务  
+   - 生成对应 Agent Instance：  
+     - **Agent Worker**：谁来执行  
+     - **上下文**：当前状态／历史数据  
+     - **Procedure**：实际执行步骤指令  
+
+4. **执行 & PDCA 循环**  
+   - **Plan**：确认任务参数与依赖  
+   - **Do**：Agent 执行具体操作  
+   - **Check**：校验输出是否符合预期  
+   - **Act**：若发现偏差，生成 Action Plan  
+
+5. **动态树更新**  
+   - Action Plan 中的新任务 append 到对应子树  
+   - 任务状态、依赖关系、时间线实时调整  
+   - Micro Plan 保持与 Master Plan 同步跟踪  
+
+6. **闭环反馈**  
+   - 完成各阶段后汇总汇报  
+   - 将执行数据回写 Work Process 文档，优化下次 Master/Micro Plan  
+
