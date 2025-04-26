@@ -1,0 +1,26 @@
+# Work Domain Setup 流程
+
+## 1. 创建 Work Domain
+- 允许用户新建不同类型的 **Work Domain**  
+  - 例：`Coding`、`Technical Proposal`、`Contract Draft` 等  
+
+## 2. 向导式（Wizard）配置步骤
+| 步骤 | 需配置内容 | 说明 |
+|------|------------|------|
+| **Step 1** | **名称** | 输入 Work Domain 名称 |
+| **Step 2** | **Resources** | 选择 / 新建可连接的资源类型 |
+| **Step 3** | **Tools** | 从工具清单挑选或新建所需工具 |
+| **Step 4** | **Workers** | 指定可用的 Agent / Human Worker |
+| **Step 5** | **Work Process** | 定义该领域的流程步骤（非 WBS，本质流程蓝本） |
+
+> 每一步都支持「从 Tenant 级公共库选取」或「为本 Tenant 新建」资源、工具、人员等元素。  
+> 系统支持 **多租户 (Multi-Tenant)** 结构，用于隔离与复用公司级资产。
+
+## 3. 完成创建
+- 向导完成 ⇒ **Work Domain 创建成功** 并保存全部配置。  
+
+## 4. 运行时绑定
+1. 当系统收到 **新的 Project Request** 时：  
+   - 由 **Charge Agent** 判断该请求是否属于现有 Work Domain。  
+2. **若命中** → 直接进入对应 Work Domain 执行。  
+3. **若无匹配** → 归入默认 **General Work Domain**，以常规对话形式处理。  

@@ -14,6 +14,12 @@
         "tab": "Guides",
         "groups": [
           {
+            "group": "All Guides",
+            "pages": [
+              "all-guides"
+            ]
+          },
+          {
             "group": "Get Started",
             "pages": [
               "introduction",
@@ -27,20 +33,52 @@
             ]
           },
           {
+            "group": "Journey",
+            "pages": [
+              "journeys/tenant-setup",
+              "journeys/domain-setup",
+              "journeys/project",
+              "journeys/ongoing-project"
+            ]
+          },{
+            "group": "Design",
+            "pages": [
+              "design/feature",
+              "design/data",
+              "design/ui",
+              "design/non-functional"
+            ]
+          },
+          {
             "group": "Technical",
             "pages": [
-              "tech"
+              "technical/tech-stack"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Features",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "All Features",
             "pages": [
-              "api-reference/introduction"
+              "feature/all-features"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "feature/1-platform-management",
+              "feature/2-tenant-setup",
+              "feature/3-work-lifecycle",
+              "feature/4-work-engine",
+              "feature/5-worker",
+              "feature/6-llm-agent",
+              "feature/7-llm-tools",
+              "feature/8-llm-orchestration",
+              "feature/9-reporting",
+              "feature/10-frontend"
             ]
           },
           {

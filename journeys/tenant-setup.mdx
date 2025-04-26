@@ -1,0 +1,30 @@
+# Tenant Setup 流程（更新：用户与 Human Worker 绑定）
+
+## 1. 平台结构
+- **Multi-Tenant 架构**：同一平台，可托管多个租户 (Tenant)。  
+- **Security Roles**：用于控制安全权限，区别于执行任务的 *Work Roles*。  
+
+## 2. 可配置项一览
+| 类别 | 具体内容 | 说明 |
+|------|----------|------|
+| **Security Roles** | 定义各类用户权限 | 例：Tenant Admin、Project Manager、Viewer |
+| **Users** | 创建 / 管理用户账号，并分配 **Security Roles** |  <br />• 可通过 SSO 或本地账户创建  <br />• **用户可绑定到指定的 Human Worker**（一对零或一对一） |
+| **Workers** | - **Human Worker**（可与 User 绑定，代表具体人员） <br />- **Agent Worker**（AI 代理） | 在 Tenant 级别注册并管理 |
+| **Tools** | 租户可用的工具清单 | 本地工具或外部集成 |
+| **Resources** | - Internal Resources <br />- External Connections | 文件库、数据库、API、第三方服务等 |
+| **Work Domains** | 已创建的全部 Work Domain 列表 | 供后续项目请求自动匹配 |
+
+## 3. Tenant Setup 步骤
+1. **创建 / 编辑 Security Roles**  
+2. **添加 Users**  
+   - 选择登录方式（SSO / 本地）  
+   - 为用户分配 Security Role  
+   - **可选择绑定对应的 Human Worker**（若代表具体执行者）  
+3. **注册 Workers**  
+   - Human Worker（可与 User 绑定）  
+   - Agent Worker  
+4. **配置 Tools**（从库中挑选或新增）  
+5. **连接 Resources**（内部或外部）  
+6. **查看 / 管理 Work Domains**  
+
+> 通过 “用户 ⇆ Human Worker” 的绑定机制，平台可同时满足 **权限管理**（基于 User）与 **任务执行**（基于 Worker）两种需求，确保租户拥有完整、安全、可追溯的工作环境。

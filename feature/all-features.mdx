@@ -1,0 +1,351 @@
+---
+title: 'All Features'
+description: 'Complete documentation of all Zeeren Platform features in one page'
+---
+
+# All Features - Complete Documentation
+
+<Note>
+  This page contains all the content from the Features section merged into a single document for easier reading and searching. It's particularly useful when you want to:
+  - Read through all feature documentation in one place without navigating between pages
+  - Search for specific features across all documentation
+  - Print or save a complete reference of all platform features
+</Note>
+
+## Table of Contents
+
+- [1. Platform Management](#1-platform-management)
+- [2. Tenant Setup](#2-tenant-setup)
+- [3. Work Lifecycle Management](#3-work-lifecycle-management)
+- [4. Work Engine & Execution](#4-work-engine--execution)
+- [5. Worker & Agent Framework](#5-worker--agent-framework)
+- [6. Resource & Knowledge Management](#6-resource--knowledge-management)
+- [7. Tool Registry & Execution](#7-tool-registry--execution)
+- [8. ROI & Governance Dashboard](#8-roi--governance-dashboard)
+- [9. Analytics & Reporting](#9-analytics--reporting)
+- [10. Frontend Applications](#10-frontend-applications)
+
+---
+
+## 1. Platform Management
+
+### 1.1 Multi-Tenant Core
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **1.1** | **Multi-Tenant Core** | 1.1.1 Create, edit, suspend, delete tenants via Admin UI & API. <br/>1.1.2 Isolate tenant data at DB-schema level (PostgreSQL schemas) and, for MongoDB, by database. <br/>1.1.3 Allow tenant-scoped overrides (branding, locale, feature toggles). <br/>1.1.4 Support cross-tenant artifact sharing with explicit agreements. |
+
+### 1.2 Authentication & SSO
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **1.2** | **Authentication & SSO** | 1.2.1 Native email / password auth (bcrypt). <br/>1.2.2 OAuth 2 / OIDC SSO for Google & GitHub; pluggable providers. <br/>1.2.3 Per-tenant SSO settings (client ID, secret, mapping rules). <br/>1.2.4 JWT access + rotating refresh tokens; configurable TTL. <br/>1.2.5 Optional MFA per user (TOTP, WebAuthn). |
+
+### 1.3 Role & Permission Engine
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **1.3** | **Role & Permission Engine** | 1.3.1 Hierarchical RBAC (System → Tenant → Project). <br />1.3.2 Fine-grained permissions to API method & UI route. <br />1.3.3 Policy editor with role templates (Admin, Domain Owner, Worker, Auditor). <br />1.3.4 Dynamic "grant on resource" rules (e.g., assignee auto-granted edit). |
+
+---
+
+## 2. Tenant Setup
+
+### 2.1 Tenant Dashboard & Insights
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.1** | **Tenant Dashboard & Insights** | 2.1.1 Real-time status (active users, running Works, agent runtime, LLM token spend). <br />2.1.2 Quota gauges (storage GB, agent h, token budget) with soft/hard-limit markers. <br />2.1.3 Recent activity stream (last 50 events) filterable by type. <br />2.1.4 Quick-action shortcuts (invite user, create worker, adjust roles). |
+
+### 2.2 User & Role Management
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.2** | **User & Role Management** | 2.2.1 Invite, deactivate, reactivate, delete users; CSV bulk import (≤ 2 k rows). <br />2.2.2 Assign multiple roles per user; full diff-log. <br />2.2.3 Role editor (create, clone, edit) scoped to tenant; inherits global templates. <br />2.2.4 Optional self-service role-request workflow with admin approve/deny. |
+
+### 2.3 Worker Catalog Management
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.3** | **Worker Catalog Management** | 2.3.1 Register Human Worker (name, title, avatar, skills). <br/>2.3.2 Register Agent Worker (name, role, LLM backend, skill tags, tool allowances). <br/>2.3.3 Search / filter workers by skill, type, availability. <br/>2.3.4 Batch-update skills or tool permissions for selected workers. |
+
+### 2.4 Tool & Resource Registry
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.4** | **Tool & Resource Registry** | 2.4.1 Register external tools (API endpoint, auth method, input/output schema). <br />2.4.2 Connect resources (file storage, databases, knowledge bases). <br />2.4.3 Test connectivity with one-click validation. <br />2.4.4 Manage access control (which Workers can use which Tools). |
+
+### 2.5 Quota & Usage Monitoring
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.5** | **Quota & Usage Monitoring** | 2.5.1 Real-time counters for LLM tokens, storage, agent runtime, API calls. <br />2.5.2 Custom soft-limit alerts (e-mail, webhook) & hard-limit cut-offs. <br />2.5.3 Monthly usage export (CSV/JSON) downloadable & auto-pushed to object storage. <br />2.5.4 Prorated calculations when plan is upgraded mid-cycle. |
+
+### 2.6 Audit & Activity Logs
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **2.6** | **Audit & Activity Logs** | 2.6.1 Immutable log of tenant events (auth, config change, worker exec, tool registry actions, data export). <br />2.6.2 Search / filter by actor, IP, action type, date; paginate 10 k rows/screen. <br />2.6.3 Download log bundle (signed CSV/JSON + SHA-256 manifest). <br />2.6.4 Continuous export to SIEM (S3 / HTTPS webhook) optional. |
+
+---
+
+## 3. Work Lifecycle Management
+
+### 3.1 Work Creation Wizard
+
+| ID | Feature | Functional Requirements   |
+|----|---------|------------------------- |
+| **3.1** | **Work Creation Wizard** | 3.1.1 Step-by-step UI (select Work Domain → choose Playbook → name work → set due dates & priority). <br />3.1.2 Auto-suggest template data (default ROI thresholds, team roles) based on Domain metadata. <br />3.1.3 "Quick-create" API endpoint for machine-triggered works (JSON payload). <br />3.1.4 Validation: block creation if tenant quota exceeded or Playbook version is deprecated. <br />3.1.5 Pre-flight checklist summarises chosen options before commit. |
+
+### 3.2 WBS Auto-Generator
+
+| ID | Feature | Functional Requirements   |
+|----|---------|------------------------- |
+| **3.2** | **WBS Auto-Generator** | 3.2.1 Parse selected Playbook and instantiate hierarchical WBS tree. <br />3.2.2 Map role → Worker (agent/human) using availability & skill matching rules. <br />3.2.3 Add system-generated "meta tasks" for ROI tracking and post-mortem by default. <br />3.2.4 Support manual override: admin may edit tree before launch. <br />3.2.5 Store generation log (rules fired, matches chosen) for audit. |
+
+### 3.3 Master / Micro Plan Views
+
+| ID | Feature | Functional Requirements   |
+|----|---------|------------------------- |
+| **3.3** | **Master / Micro Plan Views** | 3.3.1 Master Plan: high-level phases, milestones, critical path auto-highlight. <br />3.3.2 Micro Plan: zoom into any branch; auto-expand dynamic tasks added during execution. <br />3.3.3 Real-time status badges (blocked, in-progress, done) with WebSocket updates. <br />3.3.4 Time-machine slider to visualise plan at any historical snapshot (versioned deltas). <br />3.3.5 Export plans to PDF, PNG, or MS Project XML. |
+
+### 3.4 Task Board (Kanban / Gantt)
+
+| ID | Feature | Functional Requirements   |
+|----|---------|------------------------- |
+| **3.4** | **Task Board (Kanban / Gantt)** | 3.4.1 Dual modes: Kanban columns (stage lanes) and Gantt timeline. <br />3.4.2 Drag-and-drop task reassignment or date adjust (respect dependency constraints). <br />3.4.3 Inline task card shows assignee avatar(s), ETA, ROI delta, latest comment. <br />3.4.4 Bulk actions: mark done, change status, assign worker. <br />3.4.5 Board filters (role, status, priority, label) + saved views per user. |
+
+---
+
+## 4. Work Engine & Execution
+
+### 4.1 Scheduler & Orchestrator
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **4.1** | **Scheduler & Orchestrator** | 4.1.1 Pull ready tasks from WBS queue; apply priority, dependency, and SLA rules. <br />4.1.2 Allocate workload to Agent or Human Worker respecting concurrency & quota limits. <br />4.1.3 Support cron-like triggers and event-driven re-schedules (e.g., artifact updated). <br />4.1.4 Provide traceable schedule log explaining why and when each task was dispatched. <br />4.1.5 Auto-pause the entire Work when the tenant enters "suspended" state. |
+
+### 4.2 Agent-Loop Runtime
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **4.2** | **Agent-Loop Runtime** | 4.2.1 Instantiate Action Agent with task context (system prompt, input schema, tool list). <br />4.2.2 Stream LLM tokens; enforce max-token and cost guardrails per tenant plan. <br />4.2.3 Track tool invocations, intermediate reasoning steps, and final output; persist to audit log. <br />4.2.4 Collect self-reported confidence and reasoning chain; expose to PDCA Manager. <br />4.2.5 Provide graceful cancel on user abort, budget exhaustion, or policy violation. |
+
+### 4.3 Human Task Inbox
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **4.3** | **Human Task Inbox** | 4.3.1 Unified inbox showing tasks assigned to the current user in real-time via Work World WebSocket. <br />4.3.2 "Claim / Delegate / Reject" controls with reason capture. <br />4.3.3 Inline forms for quick actions (approve doc, comment, upload artifact). <br />4.3.4 Smart reminders (e-mail and in-app) based on due-date heuristics. <br />4.3.5 Offline PWA cache and automatic sync when connection restores. |
+
+### 4.4 PDCA-Feedback Manager
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **4.4** | **PDCA-Feedback Manager** | 4.4.1 Record Plan → Do → Check → Act cycles for every task; auto-generate "Check" entries from test results or reviewer feedback. <br />4.4.2 Compute ROI delta and quality score after execution; feed results to the Scheduler for continuous improvement. <br />4.4.3 Surface actionable insights (recurring bottleneck roles, tool latency spikes). <br />4.4.4 Provide one-click "Apply improvement" to update Playbook and WBS templates. |
+
+### 4.5 Exception Handling & Escalation
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **4.5** | **Exception Handling & Escalation** | 4.5.1 Detect task failures, SLA breaches, budget overruns, and policy violations. <br />4.5.2 Apply automatic retry matrix (immediate, exponential back-off, alternate agent). <br />4.5.3 Execute escalation rules (notify role X after N retries, page on-call via SMS/Slack). <br />4.5.4 Offer incident console with root-cause links (logs, traces, diffs). <br />4.5.5 Auto-generate a post-mortem template once the incident is resolved. |
+
+---
+
+## 5. Worker & Agent Framework
+
+### 5.1 Human Worker Profiles
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.1** | **Human Worker Profiles** | 5.1.1 Create and manage Human Worker profiles with name, title, skills, and availability calendar. <br />5.1.2 Link Human Worker to User account (optional 1:1 mapping). <br />5.1.3 Track historical task performance metrics (completion rate, on-time %, quality score). <br />5.1.4 Set notification preferences (e-mail, browser push, Slack) per worker. <br />5.1.5 Configure auto-delegation rules for vacation/absence periods. |
+
+### 5.2 Agent Worker Profiles
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.2** | **Agent Worker Profiles** | 5.2.1 Define LLM backend, model version, and default system prompt per Agent Worker. <br />5.2.2 List declared skills with proficiency level and supported languages. <br />5.2.3 Configure tool allowances (read / write / execute) and daily cost budget caps. <br />5.2.4 Maintain profile version history; allow rollback to prior prompt or model settings. <br />5.2.5 Provide sandbox "test run" that executes a sample task with the current profile. |
+
+### 5.3 Tool Registry & Execution
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.3** | **Tool Registry & Execution** | 5.3.1 Register external tools with name, endpoint URL, auth method, input/output schema. <br />5.3.2 Support tool types: API, browser automation, file operations, database, LLM, vector DB. <br />5.3.3 Provide tool execution sandbox for testing with sample inputs. <br />5.3.4 Record tool usage metrics (latency, error rate, cost) and surface in dashboards. <br />5.3.5 Implement rate limiting and quota enforcement per tenant plan. |
+
+### 5.4 Resource Tree Browser
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.4** | **Resource Tree Browser** | 5.4.1 Display hierarchical Resource Tree for a Work or Domain with expandable folders and file nodes. <br />5.4.2 Preview common file types inline (Markdown, PDF, images, code, diagrams). <br />5.4.3 Create, rename, move, or delete resource nodes; drag-and-drop to reorder. <br />5.4.4 Tag resources with labels (e.g., "design", "legal", "API") and filter by tag. <br />5.4.5 Full-text search across titles, tags, and indexed content; highlight matches in preview. <br />5.4.6 Permission-aware view: respect tenant, role, and tool-based access controls. |
+
+### 5.5 ROI & Governance Dashboard
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.5** | **Cost Tracking** | 5.5.1 Collect granular cost events for LLM tokens, tool invocations, agent runtime, human labor hours, and material purchases. <br />5.5.2 Aggregate costs at task, Work, Domain, and tenant levels with drill-down and time-range filters. <br />5.5.3 Provide CSV/JSON export and webhook push of daily cost summaries. <br />5.5.4 Support cost tagging (e.g., "R&D", "client billable", "internal") for allocation reporting. |
+
+### 5.6 Work Progress Dashboards
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.6** | **Work Progress Dashboards** | 5.6.1 Provide real-time charts for task status counts (to-do, in-progress, blocked, done) across all Works or filtered by Domain, project, assignee, or label. <br />5.6.2 Show burndown/burn-up graphs and critical-path Gantt slices with auto-refresh. <br />5.6.3 Offer widget builder so users can pin custom KPIs (lead time, cycle time, agent vs. human ratio). <br />5.6.4 Allow export of any chart as PNG/SVG and underlying data as CSV/JSON. |
+
+### 5.7 Frontend Applications
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.7** | **Admin Portal** | 5.7.1 Tenant-level dashboards for usage, plan, and quota management. <br />5.7.2 CRUD operations for tenants, users, roles, workers, and tools via form wizards and bulk CSV upload. <br />5.7.3 Feature-toggle panel and plan upgrade flow connecting to billing API. <br />5.7.4 Integrated audit-log viewer with faceted search and CSV export. <br />5.7.5 Real-time notification banner for platform incidents and maintenance windows. |
+
+### 5.8 Worker Web App & Mobile Responsive UI
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.8** | **Worker Web App & Mobile Responsive UI** | 5.8.1 Unified Task Inbox and Kanban/Gantt board with live WebSocket updates. <br />5.8.2 Task detail drawer: description, inputs, attached resources, chat thread, and action buttons (claim, delegate, complete). <br />5.8.3 PWA offline mode with local task cache and background sync when online. <br />5.8.4 Self-service profile editor (name, avatar, skills, availability calendar). <br />5.8.5 Mobile-first adaptive layout for phone and tablet, including swipe gestures for task status changes. |
+
+### 5.3 Tool Registry & Execution
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **5.3** | **Tool Registry & Execution** | 5.3.1 Register external tools with name, endpoint URL, auth method, input/output schema. <br />5.3.2 Support tool types: API, browser automation, file operations, database, LLM, vector DB. <br />5.3.3 Provide tool execution sandbox for testing with sample inputs. <br />5.3.4 Record tool usage metrics (latency, error rate, cost) and surface in dashboards. <br />5.3.5 Implement rate limiting and quota enforcement per tenant plan. |
+
+---
+
+## 6. Resource & Knowledge Management
+
+### 6.1 Resource Tree Browser
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **6.1** | **Resource Tree Browser** | 6.1.1 Display hierarchical Resource Tree for a Work or Domain with expandable folders and file nodes. <br />6.1.2 Preview common file types inline (Markdown, PDF, images, code, diagrams). <br />6.1.3 Create, rename, move, or delete resource nodes; drag-and-drop to reorder. <br />6.1.4 Tag resources with labels (e.g., "design", "legal", "API") and filter by tag. <br />6.1.5 Full-text search across titles, tags, and indexed content; highlight matches in preview. <br />6.1.6 Permission-aware view: respect tenant, role, and tool-based access controls. |
+
+### 6.2 Knowledge Base & Vector Search
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **6.2** | **Knowledge Base & Vector Search** | 6.2.1 Import documents (PDF, Word, Markdown, HTML) with auto-chunking and embedding. <br />6.2.2 Provide semantic search API for agents to query relevant knowledge during execution. <br />6.2.3 Support custom metadata fields and faceted filtering alongside vector similarity. <br />6.2.4 Maintain version history and track usage statistics (most queried, most relevant). <br />6.2.5 Offer knowledge graph visualization showing relationships between concepts. |
+
+### 6.3 Version Control & Audit Trail
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **6.3** | **Version Control & Audit Trail** | 6.3.1 Automatically create a new version of any file on save or external sync. <br />6.3.2 Provide diff viewer (side-by-side) for text and rendered change markers for images or diagrams. <br />6.3.3 Allow quick restore to any prior version and record the restoration as a new version. <br />6.3.4 Track author, timestamp, and change comment with every commit; immutable audit log exportable as CSV/JSON. <br />6.3.5 Support branching mechanism for major releases and merge back with conflict resolution UI. <br />6.3.6 Retain versions based on tenant plan policy and allow administrators to purge beyond retention window. |
+
+### 6.4 SOP & Knowledge Injection Engine
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **6.4** | **SOP & Knowledge Injection Engine** | 6.4.1 Import SOP documents (Markdown, Word, PDF) and parse them into structured steps, roles, tools, and rules. <br />6.4.2 Link parsed SOP elements to Playbook tasks or generate new template tasks automatically. <br />6.4.3 Inject relevant SOP snippets as system messages or context prompts during Agent execution. <br />6.4.4 Provide runtime API for agents to query domain knowledge (glossaries, policy rules, calculators). <br />6.4.5 Update or deprecate SOP elements when source documents change; maintain version history. |
+
+---
+
+## 7. Tool Registry & Execution
+
+### 7.1 Tool Registry & Management
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **7.1** | **Tool Registry & Management** | 7.1.1 Register external tools with name, endpoint URL, auth method, input/output schema. <br />7.1.2 Support tool types: API, browser automation, file operations, database, LLM, vector DB. <br />7.1.3 Provide tool execution sandbox for testing with sample inputs. <br />7.1.4 Record tool usage metrics (latency, error rate, cost) and surface in dashboards. <br />7.1.5 Implement rate limiting and quota enforcement per tenant plan. |
+
+### 7.2 Browser Automation Tools
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **7.2** | **Browser Automation Tools** | 7.2.1 Headless browser control (navigate, click, fill forms, extract data) with screenshot capture. <br />7.2.2 Record and replay user sessions as automation scripts with visual step editor. <br />7.2.3 Support for authentication flows (basic, OAuth, cookie-based) with secure credential storage. <br />7.2.4 Scheduled execution with configurable retry logic and failure notifications. <br />7.2.5 Data extraction patterns (CSS selectors, XPath) with schema validation and transformation. |
+
+### 7.3 API Integration Framework
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **7.3** | **API Integration Framework** | 7.3.1 Connect to REST, GraphQL, and SOAP endpoints with OAuth 2.0, API key, and JWT auth. <br />7.3.2 Import OpenAPI/Swagger specs to auto-generate tool definitions and input forms. <br />7.3.3 Transform request/response payloads with JSONPath and template expressions. <br />7.3.4 Cache responses with TTL and conditional invalidation rules. <br />7.3.5 Implement circuit breaker pattern for failing endpoints with exponential backoff. |
+
+### 7.4 File & Document Processing
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **7.4** | **File & Document Processing** | 7.4.1 Parse and generate common formats (CSV, Excel, PDF, Word, Markdown) with schema validation. <br />7.4.2 Extract structured data from semi-structured documents using templates and ML. <br />7.4.3 Apply transformations (filter, map, aggregate) to tabular data with formula support. <br />7.4.4 Generate reports and visualizations from data sources with customizable templates. <br />7.4.5 Batch process file collections with parallel execution and progress tracking. |
+
+---
+
+## 8. ROI & Governance Dashboard
+
+### 8.1 Cost Tracking
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **8.1** | **Cost Tracking** | 8.1.1 Collect granular cost events for LLM tokens, tool invocations, agent runtime, human labor hours, and material purchases. <br />8.1.2 Aggregate costs at task, Work, Domain, and tenant levels with drill-down and time-range filters. <br />8.1.3 Provide CSV/JSON export and webhook push of daily cost summaries. <br />8.1.4 Support cost tagging (e.g., "R&D", "client billable", "internal") for allocation reporting. |
+
+### 8.2 Value Capture Metrics
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **8.2** | **Value Capture Metrics** | 8.2.1 Allow admins to define custom value KPIs (e.g., revenue generated, tickets closed, SLA compliance) and formulas per Work Domain. <br />8.2.2 Capture deliverable counts automatically (apps shipped, reports approved) and map them to KPIs. <br />8.2.3 Display real-time value counters and cumulative graphs alongside cost data. <br />8.2.4 Provide manual value entry UI for qualitative outcomes that cannot be auto-captured. |
+
+### 8.3 ROI Analytics & Threshold Alerts
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **8.3** | **ROI Analytics & Threshold Alerts** | 8.3.1 Calculate ROI per Work and in aggregate: `ROI = (Value – Cost) / Cost` with live updates. <br />8.3.2 Set alert rules (absolute cost ceiling, negative ROI duration, cost-to-value ratio) that trigger e-mail, Slack, or webhook notifications. <br />8.3.3 Offer heat-map view highlighting Works whose ROI falls below thresholds. <br />8.3.4 Supply comparison widgets (this month vs. last month, Domain A vs. Domain B). |
+
+### 8.4 Risk Management Rules
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **8.4** | **Risk Management Rules** | 8.4.1 Define risk policies (budget overrun %, SLA breach count, critical incident severity). <br />8.4.2 Automatically flag high-risk Works and require human approval to continue. <br />8.4.3 Maintain rule library with version history; enable/disable rules per tenant plan. <br />8.4.4 Provide audit trail of all rule evaluations and resulting actions (pause, escalate, notify). |
+
+---
+
+## 9. Analytics & Reporting
+
+### 9.1 Work Progress Dashboards
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **9.1** | **Work Progress Dashboards** | 9.1.1 Provide real-time charts for task status counts (to-do, in-progress, blocked, done) across all Works or filtered by Domain, project, assignee, or label. <br />9.1.2 Show burndown/burn-up graphs and critical-path Gantt slices with auto-refresh. <br />9.1.3 Offer widget builder so users can pin custom KPIs (lead time, cycle time, agent vs. human ratio). <br />9.1.4 Allow export of any chart as PNG/SVG and underlying data as CSV/JSON. |
+
+### 9.2 Resource Usage Analytics
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **9.2** | **Resource Usage Analytics** | 9.2.1 Track storage growth, file count, and external provider bandwidth per Work and tenant. <br />9.2.2 Display heat-maps for "hot" resources (most accessed, largest, fastest-growing). <br />9.2.3 Correlate resource usage spikes with task events and tool calls for root-cause insights. <br />9.2.4 Provide cleanup recommendations (unused versions, orphan files) with one-click purge preview. |
+
+### 9.3 Agent Performance Insights
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **9.3** | **Agent Performance Insights** | 9.3.1 Capture metrics per Agent Worker: average tokens, tool call success rate, retry count, latency, confidence score, user feedback (thumbs-up/down). <br />9.3.2 Rank agents by efficiency (value generated per cost) and reliability (failure rate). <br />9.3.3 Drill into individual runs with full reasoning trace and time-line of tool invocations. <br />9.3.4 Suggest model or prompt tuning when KPIs fall below configurable thresholds. |
+
+### 9.4 Custom Report Builder
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **9.4** | **Custom Report Builder** | 9.4.1 Drag-and-drop interface to assemble tables, charts, and markdown commentary from any dataset exposed by the analytics API. <br />9.4.2 Support scheduled report e-mails (PDF/HTML) and public share links with token-based access. <br />9.4.3 Allow SQL-like query editor for power users; auto-generate visualizations based on result schema. <br />9.4.4 Store report templates with version history and permission controls (private, team, tenant-wide). |
+
+---
+
+## 10. Frontend Applications
+
+### 10.1 Admin Portal
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **10.1** | **Admin Portal** | 10.1.1 Tenant-level dashboards for usage, plan, and quota management. <br />10.1.2 CRUD operations for tenants, users, roles, workers, and tools via form wizards and bulk CSV upload. <br />10.1.3 Feature-toggle panel and plan upgrade flow connecting to billing API. <br />10.1.4 Integrated audit-log viewer with faceted search and CSV export. <br />10.1.5 Real-time notification banner for platform incidents and maintenance windows. |
+
+### 10.2 Work Canvas & Collaboration
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **10.2** | **Work Canvas & Collaboration** | 10.2.1 Infinite zoomable canvas with resource nodes, connections, and status indicators. <br />10.2.2 Real-time multi-user editing with presence indicators and cursor tracking. <br />10.2.3 Split-pane view showing canvas alongside active resource editor or viewer. <br />10.2.4 Annotation tools (sticky notes, drawings, voice memos) attachable to any resource. <br />10.2.5 Timeline slider to visualize canvas state at any point in Work history. |
+
+### 10.3 Worker Web App & Mobile Responsive UI
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **10.3** | **Worker Web App & Mobile Responsive UI** | 10.3.1 Unified Task Inbox and Kanban/Gantt board with live WebSocket updates. <br />10.3.2 Task detail drawer: description, inputs, attached resources, chat thread, and action buttons (claim, delegate, complete). <br />10.3.3 PWA offline mode with local task cache and background sync when online. <br />10.3.4 Self-service profile editor (name, avatar, skills, availability calendar). <br />10.3.5 Mobile-first adaptive layout for phone and tablet, including swipe gestures for task status changes. |
+
+### 10.4 In-App Chat & Notification Center
+
+| ID | Feature | Functional Requirements |
+|----|---------|-------------------------|
+| **10.4** | **In-App Chat & Notification Center** | 10.4.1 Contextual chat panel on every task: supports Markdown, code blocks, image/file uploads, and voice notes. <br />10.4.2 Live streaming of Action Agent reasoning and tool call results with collapsible trace view. <br />10.4.3 Global notification tray aggregating task updates, mentions, escalations, and ROI/risk alerts. <br />10.4.4 User-configurable notification preferences (browser push, e-mail, mobile push, Slack). <br />10.4.5 Searchable chat history with filters for agent only, human only, or system events. |
+
+---
+ 

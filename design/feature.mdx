@@ -1,0 +1,73 @@
+# Enterprise Agent Platform — Feature List
+
+## 1. 平台与租户管理  
+### 1.1 多租户架构  
+- **System Admin**  
+  - 创建 / 发布 Tenant  
+  - 统一管理各 Tenant 的启停、配额、计费  
+- **Tenant Admin**  
+  - 进入 Tenant Setup 向导  
+  - 配置 **Security Roles**、Users、Workers、Tools、Resources、Work Domains  
+  - 自定义 SSO / 本地登录方式  
+
+### 1.2 安全与账户  
+- **Security Roles (RBAC)**：支持自定义角色及粒度权限  
+- **Users**  
+  - 支持账号密码、OAuth/SSO（Google、微信等）  
+  - **可绑定 Human Worker**（一对一或一对零）  
+- 登录 URL 自动切换到对应 Tenant 域名 / 路径  
+
+---
+
+## 2. 资产配置 (Tenant 级)  
+| 类别 | 主要功能 |
+|------|----------|
+| **Workers** | 创建 Human Worker / Agent Worker；跨项目分配 |
+| **Tools** | CRUD；本地或第三方集成 |
+| **Resources** | 管理内部文件库、外部 API、数据库等 |
+| **Work Domains** | 向导式创建，包含流程步骤、默认资源 / 工具 / Worker |
+
+---
+
+## 3. Work Domain Setup 向导  
+1. **名称**  
+2. **Resources**：选 / 新建可连接资源  
+3. **Tools**：选 / 新建工具  
+4. **Workers**：选择 Human / Agent  
+5. **Work Process**：定义领域流程蓝本  
+
+---
+
+## 4. Project / Work 执行  
+### 4.1 Canvas 视图  
+- 无限缩放的 2D 画布展示：  
+  - 所有 **Resource / Artifact** 的实时位置与编辑状态  
+  - Agent / Human 对文件的 P2P 协同编辑（流式渲染）  
+  - 备注、连线、标签等辅助标记  
+
+### 4.2 WBS 与任务管理  
+- 自动生成可执行 WBS 树  
+- 显示任务负责人、状态、依赖、进度条  
+- 支持 _Pause / Resume / Reassign_ 指令  
+
+### 4.3 Chat & Collaboration  
+- 与 Work Engine 的实时对话  
+- 上传文件直接转为 Resource  
+- 单条消息可引用 / 更新具体 Task 或 Artifact  
+
+### 4.4 Blueprint 视图  
+- 高层可视化版面：关键 Artifact、阶段里程碑一目了然  
+- 支持快速导航到详细 Canvas 区域  
+
+### 4.5 Agent Action Monitor  
+- 右侧「执行面板」实时显示：  
+  - Browser-use 流程（网页、表单、抓取结果等 iframe 呈现）  
+  - 爬虫 / 工具调用的中间产物卡片  
+  - 用户友好的结构化 UI，隐藏底层技术细节  
+
+---
+
+## 5. 持续协作与迭代  
+- **Worker Continuation**：支持成员离开 / 返回并自动定位待办 Task  
+- 项目结束后可重新打开进行增量 refine  
+- 全程记录成本、Token 使用量、操作日志，供追溯与优化  

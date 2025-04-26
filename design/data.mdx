@@ -1,0 +1,78 @@
+# 核心数据模型总览
+
+> 数据分为 **概念层 (Design-Time)** 与 **运行层 (Run-Time)** 两大类。
+
+---
+
+## 1. 概念层数据（Design-Time）
+
+### 1.1 平台与租户
+- **Tenant**  
+  - `tenant_id` · `name` · `created_at`
+  - **Security Roles**：`role_id` · `role_name` · `permissions[]`
+  - **Users**：`user_id` · `email` · `role_ids[]` · `sso_provider`
+  - **Login Sessions**：`session_id` · `user_id` · `expire_at`
+
+### 1.2 Work Domain
+- **WorkDomain**  
+  - `domain_id` · `name` · `description`
+  - **Processes**：流程蓝本（步骤、依赖、准则）
+  - **Tools** (引用)  
+  - **Resources** (引用)  
+  - **Workers** (引用)
+
+### 1.3 资产库
+| 实体 | 关键字段 | 说明 |
+|------|----------|------|
+| **Tool** | `tool_id` · `name` · `type` (MCP / Browser / ...) <br />`endpoint_url` · `configs` | 支持注册 LLM、爬虫、浏览器等 |
+| **Resource** | `resource_id` · `name` · `category` (file / db / api …) <br />`location` · `metadata` | 统一引用内部/外部资产 |
+| **Worker** | `worker_id` · `kind` (Human / Agent) <br />`linked_user_id` _(Human)_ <br />`model_name` · `model_server_url` _(Agent)_ | Agent Worker 记录可调用模型与工具集 |
+
+---
+
+## 2. 运行层数据（Run-Time）
+
+### 2.1 Project / Work Instance
+
+- `project_id` · `domain_id` · `status` · `created_by`
+- **WBS Tree**  
+  - `task_id` · `parent_task_id` · `assignee_id` · `state` · `due_date`
+- **Project Resources**  
+  - 引用 / 复制自 WorkDomain，可新增或覆盖
+- **Project Tools**  
+  - 继承 WorkDomain，可追加
+
+### 2.2 执行日志
+| 日志类型 | 字段示例 | 说明 |
+|----------|----------|------|
+| **ActionLog** | `action_id` · `task_id` · `worker_id` · `timestamp` · `action_type` · `payload` | 记录每一步执行（含外部工具调用） |
+| **Message** | `msg_id` · `sender_id` · `receiver_id` · `content` · `attachments[]` | 人机 / 人人 / Agent 互动内容 |
+| **TokenUsage** | `usage_id` · `action_id` · `tokens` · `latency_ms` | 统计成本与性能 |
+| **Event** | `event_id` · `event_type` · `data` · `timestamp` | 任务暂停、恢复、异常等 |
+
+### 2.3 状态快照 & 恢复
+- `project_checkpoint`  
+  - 包含当前 **WBS 状态树** + **运行上下文**  
+  - 系统崩溃或中断后可 **Breakpoint Recovery**
+
+### 2.4 成本追踪
+- **CostSummary**  
+  - `project_id` · `total_tokens` · `total_runtime_ms` · `tool_costs{}`  
+  - 支持按 Task / Worker / Tool 维度汇总
+
+---
+
+## 3. 关系示意（简要）
+
+
+``` markdown
+Tenant 1 ─┬─ Users ─┬─ Human Worker (绑定)
+          │         └─ Agent Worker
+          ├─ WorkDomains ─┬─ Processes
+          │               ├─ Tools
+          │               └─ Resources
+          └─ Projects (基于 WorkDomain) ─┬─ WBS Tasks
+                                        ├─ Project Resources
+                                        └─ Logs / Cost / Checkpoints
+
+``` 

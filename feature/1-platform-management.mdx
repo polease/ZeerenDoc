@@ -1,0 +1,7 @@
+### 1  Platform Foundation — Detailed Requirements
+
+| ID | Feature | Functional Requirements |  
+|----|---------|-------------------------| 
+| **1.1** | **Multi-Tenant Core** | 1.1.1 Create, edit, suspend, delete tenants via Admin UI & API. <br />1.1.2 Isolate tenant data at DB-schema level (PostgreSQL schemas) and, for MongoDB, by database. <br />1.1.3 Allow tenant-scoped overrides (branding, locale, feature toggles). <br />1.1.4 Support cross-tenant artifact sharing with explicit agreements. |  
+| **1.2** | **Authentication & SSO** | 1.2.1 Native email / password auth (bcrypt). <br />1.2.2 OAuth 2 / OIDC SSO for Google & GitHub; pluggable providers. <br />1.2.3 Per-tenant SSO settings (client ID, secret, mapping rules). <br />1.2.4 JWT access + rotating refresh tokens; configurable TTL. <br />1.2.5 Optional MFA per user (TOTP, WebAuthn). |  
+| **1.3** | **Role & Permission Engine** | 1.3.1 Hierarchical RBAC (System → Tenant → Project). <br />1.3.2 Fine-grained permissions to API method & UI route. <br />1.3.3 Policy editor with role templates (Admin, Domain Owner, Worker, Auditor). <br />1.3.4 Dynamic “grant on resource” rules (e.g., assignee auto-granted edit). |  
