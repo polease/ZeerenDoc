@@ -1,0 +1,415 @@
+# Zeeren Platform Implementation Task Tree
+
+## 1. Project Initialization & Setup (Foundation)
+
+- [ ] 1.1 **Project Planning & Management Setup**
+  - [ ] 1.1.1 Define project scope, timeline, and deliverables
+  - [ ] 1.1.2 Set up project management tools (Jira, GitHub Projects, etc.)
+  - [ ] 1.1.3 Create project documentation repository
+  - [ ] 1.1.4 Define development methodology and sprint cycles
+
+- [ ] 1.2 **Technical Architecture Design**
+  - [ ] 1.2.1 Finalize tech stack decisions
+    - [ ] 1.2.1.1 Frontend: Vue 3, SHADCN UI, Pinia, Vue Router, Axios, Tailwind CSS, Vite, TypeScript
+    - [ ] 1.2.1.2 Backend: Python 3.11+, FastAPI, SQLModel, Uvicorn/Gunicorn, OAuth2, JWT
+    - [ ] 1.2.1.3 Databases: PostgreSQL, MongoDB, Redis, Elasticsearch (optional)
+    - [ ] 1.2.1.4 Agent SDK: Google Agentic Development Kit
+  - [ ] 1.2.2 Create system architecture diagrams
+  - [ ] 1.2.3 Define API contracts and interfaces
+  - [ ] 1.2.4 Design database schemas for multi-tenant architecture
+
+- [ ] 1.3 **Development Environment Setup**
+  - [ ] 1.3.1 Set up development, staging, and production environments
+  - [ ] 1.3.2 Configure CI/CD pipelines
+  - [ ] 1.3.3 Establish coding standards and linting rules
+  - [ ] 1.3.4 Set up Docker containers for local development
+
+## 2. Core Platform Infrastructure
+
+- [ ] 2.1 **Multi-Tenant Core Implementation**
+  - [ ] 2.1.1 Implement tenant database isolation (PostgreSQL schemas, MongoDB databases)
+  - [ ] 2.1.2 Create tenant management API
+  - [ ] 2.1.3 Build tenant configuration system (branding, locale, feature toggles)
+  - [ ] 2.1.4 Implement cross-tenant artifact sharing mechanism
+
+- [ ] 2.2 **Authentication & SSO System**
+  - [ ] 2.2.1 Implement native email/password authentication with bcrypt
+  - [ ] 2.2.2 Integrate OAuth 2/OIDC SSO for Google & GitHub
+  - [ ] 2.2.3 Develop per-tenant SSO settings configuration
+  - [ ] 2.2.4 Implement JWT access and rotating refresh tokens
+  - [ ] 2.2.5 Add MFA support (TOTP, WebAuthn)
+
+- [ ] 2.3 **Role & Permission Engine**
+  - [ ] 2.3.1 Build hierarchical RBAC (System → Tenant → Project)
+  - [ ] 2.3.2 Implement fine-grained permissions for API methods & UI routes
+  - [ ] 2.3.3 Create policy editor with role templates
+  - [ ] 2.3.4 Develop dynamic "grant on resource" rules
+
+- [ ] 2.4 **Audit & Activity Logging**
+  - [ ] 2.4.1 Implement immutable event logging system
+  - [ ] 2.4.2 Create search/filter functionality for logs
+  - [ ] 2.4.3 Build log export mechanism (CSV/JSON + SHA-256 manifest)
+  - [ ] 2.4.4 Implement SIEM export functionality (optional)
+
+## 3. Tenant Management System
+
+- [ ] 3.1 **Tenant Dashboard & Insights**
+  - [ ] 3.1.1 Develop real-time status monitoring
+  - [ ] 3.1.2 Implement quota gauges and limit markers
+  - [ ] 3.1.3 Create activity stream with filtering
+  - [ ] 3.1.4 Build quick-action shortcuts
+
+- [ ] 3.2 **User & Role Management**
+  - [ ] 3.2.1 Implement user invitation and management
+  - [ ] 3.2.2 Create role assignment interface with diff-log
+  - [ ] 3.2.3 Build role editor with inheritance from global templates
+  - [ ] 3.2.4 Implement self-service role-request workflow
+
+- [ ] 3.3 **Worker Catalog Management**
+  - [ ] 3.3.1 Build Human Worker registration system
+  - [ ] 3.3.2 Implement Agent Worker registration system
+  - [ ] 3.3.3 Create search/filter functionality for workers
+  - [ ] 3.3.4 Implement batch-update for worker skills and permissions
+
+- [ ] 3.4 **Tool & Resource Registry**
+  - [ ] 3.4.1 Develop external tool registration system
+  - [ ] 3.4.2 Implement resource connection management
+  - [ ] 3.4.3 Create one-click validation for connectivity
+  - [ ] 3.4.4 Build access control management for tools
+
+- [ ] 3.5 **Quota & Usage Monitoring**
+  - [ ] 3.5.1 Implement real-time counters (tokens, storage, runtime, API calls)
+  - [ ] 3.5.2 Create alerting system for limit thresholds
+  - [ ] 3.5.3 Build usage export functionality
+  - [ ] 3.5.4 Develop prorated calculations for plan changes
+
+## 4. Work Lifecycle Management
+
+- [ ] 4.1 **Work Creation Wizard**
+  - [ ] 4.1.1 Implement step-by-step UI wizard
+  - [ ] 4.1.2 Build auto-suggestion system for template data
+  - [ ] 4.1.3 Create "Quick-create" API endpoint
+  - [ ] 4.1.4 Implement validation rules
+  - [ ] 4.1.5 Build pre-flight checklist summary
+
+- [ ] 4.2 **WBS Auto-Generator**
+  - [ ] 4.2.1 Implement Playbook parser for WBS tree generation
+  - [ ] 4.2.2 Create role-to-Worker mapping system
+  - [ ] 4.2.3 Implement "meta tasks" generation for tracking
+  - [ ] 4.2.4 Build manual override functionality
+  - [ ] 4.2.5 Implement generation logging for audit
+
+- [ ] 4.3 **Master/Micro Plan Views**
+  - [ ] 4.3.1 Develop Master Plan view with critical path highlighting
+  - [ ] 4.3.2 Implement Micro Plan zoom functionality
+  - [ ] 4.3.3 Create real-time status badges with WebSocket updates
+  - [ ] 4.3.4 Build time-machine slider for historical snapshots
+  - [ ] 4.3.5 Implement plan export functionality
+
+- [ ] 4.4 **Task Board (Kanban/Gantt)**
+  - [ ] 4.4.1 Build dual-mode task board (Kanban and Gantt)
+  - [ ] 4.4.2 Implement drag-and-drop functionality with constraints
+  - [ ] 4.4.3 Create inline task cards with comprehensive information
+  - [ ] 4.4.4 Implement bulk actions for tasks
+  - [ ] 4.4.5 Build board filters and saved views
+
+## 5. Work Engine & Execution
+
+- [ ] 5.1 **Scheduler & Orchestrator**
+  - [ ] 5.1.1 Implement task queue system with priority and dependency rules
+  - [ ] 5.1.2 Build workload allocation system for Agents and Human Workers
+  - [ ] 5.1.3 Implement trigger system (cron-like and event-driven)
+  - [ ] 5.1.4 Create schedule logging system
+  - [ ] 5.1.5 Implement automatic work pausing for suspended tenants
+
+- [ ] 5.2 **Agent-Loop Runtime**
+  - [ ] 5.2.1 Develop Action Agent instantiation system
+  - [ ] 5.2.2 Implement LLM token streaming with guardrails
+  - [ ] 5.2.3 Create tool invocation tracking and audit logging
+  - [ ] 5.2.4 Implement confidence and reasoning collection
+  - [ ] 5.2.5 Build graceful cancellation system
+
+- [ ] 5.3 **Human Task Inbox**
+  - [ ] 5.3.1 Create unified inbox with real-time updates
+  - [ ] 5.3.2 Implement task action controls
+  - [ ] 5.3.3 Build inline forms for quick actions
+  - [ ] 5.3.4 Develop smart reminder system
+  - [ ] 5.3.5 Implement offline PWA cache and sync
+
+- [ ] 5.4 **PDCA-Feedback Manager**
+  - [ ] 5.4.1 Implement PDCA cycle tracking for tasks
+  - [ ] 5.4.2 Build ROI delta and quality score computation
+  - [ ] 5.4.3 Create insights generation system
+  - [ ] 5.4.4 Implement one-click improvements for Playbooks
+
+- [ ] 5.5 **Exception Handling & Escalation**
+  - [ ] 5.5.1 Develop exception detection system
+  - [ ] 5.5.2 Implement automatic retry matrix
+  - [ ] 5.5.3 Build escalation rules execution
+  - [ ] 5.5.4 Create incident console with root-cause links
+  - [ ] 5.5.5 Implement post-mortem template generation
+
+## 6. Worker & Agent Framework
+
+- [ ] 6.1 **Human Worker Profiles**
+  - [ ] 6.1.1 Implement profile creation and management
+  - [ ] 6.1.2 Create User account linking
+  - [ ] 6.1.3 Build performance metrics tracking
+  - [ ] 6.1.4 Implement notification preferences
+  - [ ] 6.1.5 Create auto-delegation rules
+
+- [ ] 6.2 **Agent Worker Profiles**
+  - [ ] 6.2.1 Implement LLM backend and prompt configuration
+  - [ ] 6.2.2 Create skill declaration system
+  - [ ] 6.2.3 Build tool allowances and budget configuration
+  - [ ] 6.2.4 Implement profile version history and rollback
+  - [ ] 6.2.5 Create sandbox test environment
+
+- [ ] 6.3 **Tool Registry & Execution**
+  - [ ] 6.3.1 Implement tool registration system
+  - [ ] 6.3.2 Build support for various tool types
+  - [ ] 6.3.3 Create tool execution sandbox
+  - [ ] 6.3.4 Implement usage metrics recording
+  - [ ] 6.3.5 Build rate limiting and quota enforcement
+
+## 7. Resource & Knowledge Management
+
+- [ ] 7.1 **Resource Tree Browser**
+  - [ ] 7.1.1 Implement hierarchical resource tree display
+  - [ ] 7.1.2 Create file preview functionality
+  - [ ] 7.1.3 Build resource CRUD operations with drag-and-drop
+  - [ ] 7.1.4 Implement resource tagging and filtering
+  - [ ] 7.1.5 Create full-text search across resources
+  - [ ] 7.1.6 Implement permission-aware views
+
+- [ ] 7.2 **Knowledge Base & Vector Search**
+  - [ ] 7.2.1 Build document import with auto-chunking and embedding
+  - [ ] 7.2.2 Implement semantic search API
+  - [ ] 7.2.3 Create metadata fields and faceted filtering
+  - [ ] 7.2.4 Implement version history and usage statistics
+  - [ ] 7.2.5 Build knowledge graph visualization
+
+- [ ] 7.3 **Version Control & Audit Trail**
+  - [ ] 7.3.1 Implement automatic version creation
+  - [ ] 7.3.2 Create diff viewer for various file types
+  - [ ] 7.3.3 Build version restoration functionality
+  - [ ] 7.3.4 Implement comprehensive audit trail
+  - [ ] 7.3.5 Create branching and merging mechanism
+  - [ ] 7.3.6 Implement version retention policies
+
+- [ ] 7.4 **SOP & Knowledge Injection Engine**
+  - [ ] 7.4.1 Build SOP document import and parsing
+  - [ ] 7.4.2 Implement Playbook task linking
+  - [ ] 7.4.3 Create SOP injection for Agent execution
+  - [ ] 7.4.4 Implement domain knowledge query API
+  - [ ] 7.4.5 Build SOP update and version management
+
+## 8. Tool Registry & Execution
+
+- [ ] 8.1 **Tool Registry & Management**
+  - [ ] 8.1.1 Implement external tool registration
+  - [ ] 8.1.2 Build support for various tool types
+  - [ ] 8.1.3 Create tool execution sandbox
+  - [ ] 8.1.4 Implement usage metrics recording
+  - [ ] 8.1.5 Build rate limiting and quota enforcement
+
+- [ ] 8.2 **Browser Automation Tools**
+  - [ ] 8.2.1 Implement headless browser control
+  - [ ] 8.2.2 Build session recording and replay
+  - [ ] 8.2.3 Implement authentication flow support
+  - [ ] 8.2.4 Create scheduled execution system
+  - [ ] 8.2.5 Build data extraction patterns
+
+- [ ] 8.3 **API Integration Framework**
+  - [ ] 8.3.1 Implement various API endpoint connections
+  - [ ] 8.3.2 Build OpenAPI/Swagger spec import
+  - [ ] 8.3.3 Create payload transformation system
+  - [ ] 8.3.4 Implement response caching
+  - [ ] 8.3.5 Build circuit breaker pattern for failing endpoints
+
+- [ ] 8.4 **File & Document Processing**
+  - [ ] 8.4.1 Implement common format parsing and generation
+  - [ ] 8.4.2 Build data extraction from semi-structured documents
+  - [ ] 8.4.3 Create data transformation functionality
+  - [ ] 8.4.4 Implement report and visualization generation
+  - [ ] 8.4.5 Build batch processing system
+
+## 9. ROI & Governance Dashboard
+
+- [ ] 9.1 **Cost Tracking**
+  - [ ] 9.1.1 Implement granular cost event collection
+  - [ ] 9.1.2 Build cost aggregation at various levels
+  - [ ] 9.1.3 Create cost export functionality
+  - [ ] 9.1.4 Implement cost tagging system
+
+- [ ] 9.2 **Value Capture Metrics**
+  - [ ] 9.2.1 Create custom KPI definition system
+  - [ ] 9.2.2 Implement automatic deliverable counting
+  - [ ] 9.2.3 Build real-time value counters and graphs
+  - [ ] 9.2.4 Create manual value entry UI
+
+- [ ] 9.3 **ROI Analytics & Threshold Alerts**
+  - [ ] 9.3.1 Implement real-time ROI calculation
+  - [ ] 9.3.2 Build alert rules for various conditions
+  - [ ] 9.3.3 Create heat-map view for ROI visualization
+  - [ ] 9.3.4 Implement comparison widgets
+
+- [ ] 9.4 **Risk Management Rules**
+  - [ ] 9.4.1 Build risk policy definition system
+  - [ ] 9.4.2 Implement automatic risk flagging
+  - [ ] 9.4.3 Create rule library with version history
+  - [ ] 9.4.4 Build audit trail for rule evaluations
+
+## 10. Analytics & Reporting
+
+- [ ] 10.1 **Work Progress Dashboards**
+  - [ ] 10.1.1 Implement real-time charts for task statuses
+  - [ ] 10.1.2 Build burndown/burn-up graphs and Gantt slices
+  - [ ] 10.1.3 Create custom KPI widget builder
+  - [ ] 10.1.4 Implement chart and data export
+
+- [ ] 10.2 **Resource Usage Analytics**
+  - [ ] 10.2.1 Implement resource usage tracking
+  - [ ] 10.2.2 Build heat-maps for "hot" resources
+  - [ ] 10.2.3 Create resource usage correlation with events
+  - [ ] 10.2.4 Implement cleanup recommendations
+
+- [ ] 10.3 **Agent Performance Insights**
+  - [ ] 10.3.1 Build Agent Worker metrics collection
+  - [ ] 10.3.2 Implement agent efficiency ranking
+  - [ ] 10.3.3 Create individual run drill-down
+  - [ ] 10.3.4 Build model/prompt tuning suggestions
+
+- [ ] 10.4 **Custom Report Builder**
+  - [ ] 10.4.1 Implement drag-and-drop report builder
+  - [ ] 10.4.2 Build scheduled report system
+  - [ ] 10.4.3 Create SQL-like query editor
+  - [ ] 10.4.4 Implement report template storage and versioning
+
+## 11. Frontend Applications
+
+- [ ] 11.1 **Admin Portal**
+  - [ ] 11.1.1 Build tenant-level dashboards
+  - [ ] 11.1.2 Implement CRUD operations for platform entities
+  - [ ] 11.1.3 Create feature-toggle panel and plan upgrade flow
+  - [ ] 11.1.4 Build integrated audit-log viewer
+  - [ ] 11.1.5 Implement real-time notification banner
+
+- [ ] 11.2 **Work Canvas & Collaboration**
+  - [ ] 11.2.1 Implement zoomable canvas with resource nodes
+  - [ ] 11.2.2 Build real-time multi-user editing
+  - [ ] 11.2.3 Create split-pane view
+  - [ ] 11.2.4 Implement annotation tools
+  - [ ] 11.2.5 Build timeline slider for canvas history
+
+- [ ] 11.3 **Worker Web App & Mobile Responsive UI**
+  - [ ] 11.3.1 Implement unified Task Inbox and board
+  - [ ] 11.3.2 Build task detail drawer
+  - [ ] 11.3.3 Create PWA offline mode
+  - [ ] 11.3.4 Implement self-service profile editor
+  - [ ] 11.3.5 Build mobile-first adaptive layout
+
+- [ ] 11.4 **In-App Chat & Notification Center**
+  - [ ] 11.4.1 Implement contextual chat panel
+  - [ ] 11.4.2 Build live streaming of Agent reasoning
+  - [ ] 11.4.3 Create global notification tray
+  - [ ] 11.4.4 Implement user-configurable notification preferences
+  - [ ] 11.4.5 Build searchable chat history
+
+## 12. Testing & Quality Assurance
+
+- [ ] 12.1 **Unit Testing**
+  - [ ] 12.1.1 Create unit tests for frontend components
+  - [ ] 12.1.2 Implement unit tests for backend services
+  - [ ] 12.1.3 Build database operation tests
+  - [ ] 12.1.4 Implement API contract tests
+
+- [ ] 12.2 **Integration Testing**
+  - [ ] 12.2.1 Create end-to-end user flow tests
+  - [ ] 12.2.2 Implement multi-tenant isolation tests
+  - [ ] 12.2.3 Build Agent execution flow tests
+  - [ ] 12.2.4 Implement tool integration tests
+
+- [ ] 12.3 **Performance & Load Testing**
+  - [ ] 12.3.1 Create API performance benchmarks
+  - [ ] 12.3.2 Implement multi-tenant load testing
+  - [ ] 12.3.3 Build database performance tests
+  - [ ] 12.3.4 Implement file storage and processing tests
+
+- [ ] 12.4 **Security Testing**
+  - [ ] 12.4.1 Conduct authentication and authorization tests
+  - [ ] 12.4.2 Implement data isolation tests
+  - [ ] 12.4.3 Build API security tests
+  - [ ] 12.4.4 Implement vulnerability scanning
+
+## 13. Deployment & DevOps
+
+- [ ] 13.1 **Infrastructure as Code**
+  - [ ] 13.1.1 Create infrastructure templates (Terraform, CloudFormation, etc.)
+  - [ ] 13.1.2 Implement database provisioning scripts
+  - [ ] 13.1.3 Build container orchestration configuration
+  - [ ] 13.1.4 Implement network and security group configuration
+
+- [ ] 13.2 **CI/CD Pipeline**
+  - [ ] 13.2.1 Set up continuous integration workflows
+  - [ ] 13.2.2 Create deployment automation scripts
+  - [ ] 13.2.3 Implement blue/green deployment strategy
+  - [ ] 13.2.4 Build rollback mechanisms
+
+- [ ] 13.3 **Monitoring & Alerting**
+  - [ ] 13.3.1 Set up infrastructure monitoring
+  - [ ] 13.3.2 Implement application performance monitoring
+  - [ ] 13.3.3 Create alerting rules and notification channels
+  - [ ] 13.3.4 Build automated incident response
+
+- [ ] 13.4 **Backup & Disaster Recovery**
+  - [ ] 13.4.1 Implement database backup strategy
+  - [ ] 13.4.2 Create file storage backup procedures
+  - [ ] 13.4.3 Build system recovery playbooks
+  - [ ] 13.4.4 Implement regular recovery testing
+
+## 14. Documentation & Training
+
+- [ ] 14.1 **Technical Documentation**
+  - [ ] 14.1.1 Create system architecture documentation
+  - [ ] 14.1.2 Build API documentation
+  - [ ] 14.1.3 Implement code documentation standards
+  - [ ] 14.1.4 Create database schema documentation
+
+- [ ] 14.2 **User Documentation**
+  - [ ] 14.2.1 Create admin user guides
+  - [ ] 14.2.2 Build worker user guides
+  - [ ] 14.2.3 Implement in-app tutorials and tooltips
+  - [ ] 14.2.4 Create knowledge base articles
+
+- [ ] 14.3 **Training Materials**
+  - [ ] 14.3.1 Build administrator training curriculum
+  - [ ] 14.3.2 Create worker onboarding materials
+  - [ ] 14.3.3 Implement interactive training modules
+  - [ ] 14.3.4 Create video tutorials
+
+## 15. Launch & Post-Launch
+
+- [ ] 15.1 **Beta Testing**
+  - [ ] 15.1.1 Select beta customers/users
+  - [ ] 15.1.2 Implement feedback collection system
+  - [ ] 15.1.3 Conduct beta testing sessions
+  - [ ] 15.1.4 Analyze and prioritize feedback
+
+- [ ] 15.2 **Production Launch**
+  - [ ] 15.2.1 Create launch checklist
+  - [ ] 15.2.2 Implement staged rollout plan
+  - [ ] 15.2.3 Build customer onboarding process
+  - [ ] 15.2.4 Create marketing and communication materials
+
+- [ ] 15.3 **Post-Launch Support**
+  - [ ] 15.3.1 Implement customer support system
+  - [ ] 15.3.2 Create issue tracking and resolution process
+  - [ ] 15.3.3 Build regular update and maintenance schedule
+  - [ ] 15.3.4 Implement customer success monitoring
+
+- [ ] 15.4 **Continuous Improvement**
+  - [ ] 15.4.1 Set up feature request collection
+  - [ ] 15.4.2 Implement usage analytics
+  - [ ] 15.4.3 Create performance optimization process
+  - [ ] 15.4.4 Build roadmap for future enhancements

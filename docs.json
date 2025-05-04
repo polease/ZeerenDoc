@@ -35,6 +35,7 @@
           {
             "group": "Journey",
             "pages": [
+              "journeys/role",
               "journeys/tenant-setup",
               "journeys/domain-setup",
               "journeys/project",
@@ -73,12 +74,11 @@
               "feature/2-tenant-setup",
               "feature/3-work-lifecycle",
               "feature/4-work-engine",
-              "feature/5-worker",
-              "feature/6-llm-agent",
-              "feature/7-llm-tools",
-              "feature/8-llm-orchestration",
-              "feature/9-reporting",
-              "feature/10-frontend"
+              "feature/5-worker", 
+              "feature/6-tools",
+              "feature/7-resources",
+              "feature/8-roi",
+              "feature/9-reporting"
             ]
           },
           {
@@ -90,6 +90,20 @@
               "api-reference/endpoint/webhook"
             ]
           }
+        ]
+      },
+      {
+        "tab": "Build",
+        "groups": [
+          {
+            "group": "Tasks",
+            "pages": [
+              "build/task",
+              "build/component-index",
+              "build/ui-screen-list"
+            ]
+          }
+
         ]
       }
     ],

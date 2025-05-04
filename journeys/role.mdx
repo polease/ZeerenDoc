@@ -1,0 +1,11 @@
+### Key roles in the Enterprise Agent Planning Platform
+
+| # | Role | Main responsibilities / Where defined |
+|---|------|---------------------------------------|
+| 1 | **System / Platform Admin** | Manages the whole multi‑tenant platform: create / suspend tenants, quotas, billing, global policies, incident banners. <br />*Ref: 1.1 Multi‑Tenant Core, 10.1 Admin Portal* |
+| 2 | **Tenant Admin** | Configures a single tenant: branding, SSO, plan & quota, users, tool registry, tenant policies. <br />*Ref: 2 Tenant Setup, 10.1 Admin Portal* |
+| 3 | **Domain Owner** | Curates a **Work Domain**: Playbooks, SOP injection, default workers/tools, ROI thresholds. <br />*Ref: Core Concepts, Role & Permission Engine* |
+| 4 | **Auditor / Compliance** | Read‑only access to audit logs, cost & risk dashboards; enforces governance policies. <br />*Ref: 2.6 Audit & Activity Logs, 8.4 Risk Management Rules* |
+| 5 | **Human Worker** | Real person executing tasks via Task Inbox / Canvas. <br />*Ref: 5.1 Human Worker Profiles, 4.3 Human Task Inbox* |
+| 6 | **Agent Worker** | LLM‑powered Action Agent with tool permissions, prompts, budgets; runs in Agent‑Loop runtime. <br />*Ref: 5.2 Agent Worker Profiles, 4.2 Agent‑Loop Runtime* |
+| 7 | **Work Requestor** | Business user who proposes new Works and tracks progress. Can use Work Creation Wizard, view WBS / dashboards, comment & approve deliverables; no task editing or admin rights. <br />*Ref: Role & Permission Engine* |

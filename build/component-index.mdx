@@ -1,0 +1,337 @@
+# Zeeren Platform - Component File Name List
+
+## 1. Core Platform
+
+### 1.1 Multi-Tenant Core
+- `src/core/tenant/TenantManager.ts`
+- `src/core/tenant/TenantService.ts`
+- `src/core/tenant/TenantRepository.ts`
+- `src/core/tenant/TenantModel.ts`
+- `src/core/tenant/TenantController.ts`
+
+### 1.2 Authentication & SSO
+- `src/auth/AuthService.ts`
+- `src/auth/AuthController.ts`
+- `src/auth/providers/OAuthProvider.ts`
+- `src/auth/providers/GoogleAuthProvider.ts`
+- `src/auth/providers/GithubAuthProvider.ts`
+- `src/auth/MfaService.ts`
+- `src/auth/JwtService.ts`
+
+### 1.3 Role & Permission Engine
+- `src/access/RoleManager.ts`
+- `src/access/PermissionService.ts`
+- `src/access/PolicyEngine.ts`
+- `src/access/RoleTemplateService.ts`
+- `src/access/RoleController.ts`
+
+## 2. Tenant Management
+
+### 2.1 Tenant Dashboard
+- `src/dashboard/TenantDashboardService.ts`
+- `src/dashboard/InsightsService.ts`
+- `src/dashboard/ActivityStreamService.ts`
+- `src/dashboard/QuotaService.ts`
+
+### 2.2 User & Role Management
+- `src/admin/UserManager.ts`
+- `src/admin/UserImportService.ts`
+- `src/admin/RoleAssignmentService.ts`
+- `src/admin/RoleEditorService.ts`
+- `src/admin/RoleRequestWorkflow.ts`
+
+### 2.3 Worker Catalog
+- `src/worker/catalog/WorkerCatalogService.ts`
+- `src/worker/catalog/HumanWorkerService.ts`
+- `src/worker/catalog/AgentWorkerService.ts`
+- `src/worker/catalog/WorkerSearchService.ts`
+- `src/worker/catalog/SkillTagService.ts`
+
+### 2.4 Tool & Resource Registry
+- `src/tools/ToolRegistryService.ts`
+- `src/tools/ResourceConnectorService.ts`
+- `src/tools/ConnectivityValidator.ts`
+- `src/tools/ToolAccessControlService.ts`
+
+### 2.5 Quota & Usage
+- `src/quotas/UsageMonitorService.ts`
+- `src/quotas/AlertService.ts`
+- `src/quotas/UsageExportService.ts`
+- `src/quotas/BillingCalculationService.ts`
+
+### 2.6 Audit & Logs
+- `src/audit/AuditLogService.ts`
+- `src/audit/LogSearchService.ts`
+- `src/audit/LogExportService.ts`
+- `src/audit/SiemIntegrationService.ts`
+
+## 3. Work Lifecycle Management
+
+### 3.1 Work Creation
+- `src/work/creation/WorkCreationWizard.ts`
+- `src/work/creation/TemplateService.ts`
+- `src/work/creation/QuickCreateApi.ts`
+- `src/work/creation/ValidationService.ts`
+
+### 3.2 WBS Generator
+- `src/work/wbs/WbsGeneratorService.ts`
+- `src/work/wbs/WorkerMatchingService.ts`
+- `src/work/wbs/MetaTaskService.ts`
+- `src/work/wbs/TreeEditorService.ts`
+
+### 3.3 Plan Views
+- `src/work/plans/MasterPlanService.ts`
+- `src/work/plans/MicroPlanService.ts`
+- `src/work/plans/StatusUpdateService.ts`
+- `src/work/plans/VersionHistoryService.ts`
+- `src/work/plans/ExportService.ts`
+
+### 3.4 Task Board
+- `src/work/taskboard/KanbanBoardService.ts`
+- `src/work/taskboard/GanttViewService.ts`
+- `src/work/taskboard/TaskCardService.ts`
+- `src/work/taskboard/TaskBulkActionService.ts`
+- `src/work/taskboard/FilterService.ts`
+
+## 4. Work Execution Engine
+
+### 4.1 Scheduler & Orchestrator
+- `src/engine/scheduler/TaskScheduler.ts`
+- `src/engine/scheduler/WorkloadAllocator.ts`
+- `src/engine/scheduler/TriggerService.ts`
+- `src/engine/scheduler/ScheduleLogService.ts`
+- `src/engine/scheduler/WorkStateManager.ts`
+
+### 4.2 Agent Runtime
+- `src/engine/agent/ActionAgentRuntime.ts`
+- `src/engine/agent/LlmStreamService.ts`
+- `src/engine/agent/ExecutionTracker.ts`
+- `src/engine/agent/ConfidenceAnalyzer.ts`
+- `src/engine/agent/ExecutionGuardrails.ts`
+
+### 4.3 Human Tasks
+- `src/engine/human/TaskInboxService.ts`
+- `src/engine/human/TaskActionService.ts`
+- `src/engine/human/TaskFormService.ts`
+- `src/engine/human/ReminderService.ts`
+- `src/engine/human/OfflineSyncService.ts`
+
+### 4.4 PDCA Feedback
+- `src/engine/pdca/PdcaManager.ts`
+- `src/engine/pdca/RoiCalculator.ts`
+- `src/engine/pdca/InsightService.ts`
+- `src/engine/pdca/PlaybookUpdateService.ts`
+
+### 4.5 Exception Handling
+- `src/engine/exceptions/ExceptionDetector.ts`
+- `src/engine/exceptions/RetryService.ts`
+- `src/engine/exceptions/EscalationService.ts`
+- `src/engine/exceptions/IncidentConsole.ts`
+- `src/engine/exceptions/PostMortemService.ts`
+
+## 5. Worker Framework
+
+### 5.1 Human Worker
+- `src/worker/human/HumanWorkerService.ts`
+- `src/worker/human/AvailabilityCalendar.ts`
+- `src/worker/human/PerformanceMetrics.ts`
+- `src/worker/human/NotificationPreferences.ts`
+- `src/worker/human/DelegationRules.ts`
+
+### 5.2 Agent Worker
+- `src/worker/agent/AgentProfileService.ts`
+- `src/worker/agent/SkillDefinitionService.ts`
+- `src/worker/agent/ToolAllowanceService.ts`
+- `src/worker/agent/ProfileVersionService.ts`
+- `src/worker/agent/SandboxService.ts`
+
+## 6. Resource Management
+
+### 6.1 Resource Tree
+- `src/resources/ResourceTreeService.ts`
+- `src/resources/PreviewService.ts`
+- `src/resources/TreeManipulationService.ts`
+- `src/resources/ResourceTaggingService.ts`
+- `src/resources/SearchService.ts`
+- `src/resources/PermissionService.ts`
+
+### 6.2 Knowledge Base
+- `src/knowledge/DocumentImportService.ts`
+- `src/knowledge/SemanticSearchService.ts`
+- `src/knowledge/MetadataService.ts`
+- `src/knowledge/VersionTrackingService.ts`
+- `src/knowledge/GraphVisualizationService.ts`
+
+### 6.3 Version Control
+- `src/versioning/VersionControlService.ts`
+- `src/versioning/DiffViewerService.ts`
+- `src/versioning/RestoreService.ts`
+- `src/versioning/AuditTrailService.ts`
+- `src/versioning/BranchingService.ts`
+- `src/versioning/RetentionService.ts`
+
+### 6.4 SOP & Knowledge
+- `src/knowledge/SopImportService.ts`
+- `src/knowledge/PlaybookLinkingService.ts`
+- `src/knowledge/ContextInjectionService.ts`
+- `src/knowledge/DomainKnowledgeApi.ts`
+- `src/knowledge/SopVersioningService.ts`
+
+## 7. Tool Registry & Execution
+
+### 7.1 Tool Registry
+- `src/tools/registry/ToolRegistryService.ts`
+- `src/tools/registry/ToolTypeRegistry.ts`
+- `src/tools/registry/SandboxService.ts`
+- `src/tools/registry/MetricsService.ts`
+- `src/tools/registry/RateLimitService.ts`
+
+### 7.2 Browser Automation
+- `src/tools/browser/BrowserControlService.ts`
+- `src/tools/browser/RecorderService.ts`
+- `src/tools/browser/AuthFlowService.ts`
+- `src/tools/browser/SchedulerService.ts`
+- `src/tools/browser/DataExtractionService.ts`
+
+### 7.3 API Integration
+- `src/tools/api/ApiConnectorService.ts`
+- `src/tools/api/OpenApiImporter.ts`
+- `src/tools/api/PayloadTransformer.ts`
+- `src/tools/api/CacheService.ts`
+- `src/tools/api/CircuitBreakerService.ts`
+
+### 7.4 File Processing
+- `src/tools/files/DocumentParserService.ts`
+- `src/tools/files/DataExtractionService.ts`
+- `src/tools/files/TransformationService.ts`
+- `src/tools/files/ReportGeneratorService.ts`
+- `src/tools/files/BatchProcessorService.ts`
+
+## 8. ROI & Governance
+
+### 8.1 Cost Tracking
+- `src/roi/CostEventCollector.ts`
+- `src/roi/CostAggregationService.ts`
+- `src/roi/CostExportService.ts`
+- `src/roi/CostTaggingService.ts`
+
+### 8.2 Value Metrics
+- `src/roi/ValueKpiService.ts`
+- `src/roi/DeliverableCounterService.ts`
+- `src/roi/ValueDashboardService.ts`
+- `src/roi/ManualValueEntryService.ts`
+
+### 8.3 ROI Analytics
+- `src/roi/RoiCalculatorService.ts`
+- `src/roi/AlertRuleService.ts`
+- `src/roi/HeatmapService.ts`
+- `src/roi/ComparisonService.ts`
+
+### 8.4 Risk Management
+- `src/governance/RiskPolicyService.ts`
+- `src/governance/RiskFlagService.ts`
+- `src/governance/RuleLibraryService.ts`
+- `src/governance/RuleAuditService.ts`
+
+## 9. Analytics & Reporting
+
+### 9.1 Work Progress
+- `src/analytics/StatusChartService.ts`
+- `src/analytics/BurndownService.ts`
+- `src/analytics/WidgetBuilderService.ts`
+- `src/analytics/ChartExportService.ts`
+
+### 9.2 Resource Usage
+- `src/analytics/StorageAnalyticsService.ts`
+- `src/analytics/HeatmapService.ts`
+- `src/analytics/RootCauseService.ts`
+- `src/analytics/CleanupRecommendationService.ts`
+
+### 9.3 Agent Performance
+- `src/analytics/AgentMetricsService.ts`
+- `src/analytics/AgentRankingService.ts`
+- `src/analytics/RunTraceService.ts`
+- `src/analytics/TuningRecommendationService.ts`
+
+### 9.4 Report Builder
+- `src/reporting/ReportBuilderService.ts`
+- `src/reporting/SchedulingService.ts`
+- `src/reporting/QueryEditorService.ts`
+- `src/reporting/TemplateStorageService.ts`
+
+## 10. Frontend Applications
+
+### 10.1 Admin Portal
+- `src/frontend/admin/AdminDashboard.vue`
+- `src/frontend/admin/TenantManager.vue`
+- `src/frontend/admin/FeatureTogglePanel.vue`
+- `src/frontend/admin/AuditViewer.vue`
+- `src/frontend/admin/NotificationManager.vue`
+
+### 10.2 Work Canvas
+- `src/frontend/canvas/WorkCanvas.vue`
+- `src/frontend/canvas/CollaborationService.ts`
+- `src/frontend/canvas/SplitPaneView.vue`
+- `src/frontend/canvas/AnnotationTools.vue`
+- `src/frontend/canvas/TimelineSlider.vue`
+
+### 10.3 Worker App
+- `src/frontend/worker/TaskInbox.vue`
+- `src/frontend/worker/TaskDetailDrawer.vue`
+- `src/frontend/worker/OfflineService.ts`
+- `src/frontend/worker/ProfileEditor.vue`
+- `src/frontend/worker/MobileLayout.vue`
+
+### 10.4 Chat & Notifications
+- `src/frontend/chat/ContextualChat.vue`
+- `src/frontend/chat/AgentStreamViewer.vue`
+- `src/frontend/chat/NotificationTray.vue`
+- `src/frontend/chat/NotificationPreferences.vue`
+- `src/frontend/chat/ChatHistorySearch.vue`
+
+## API Routes
+
+### Core API Routes
+- `src/api/routes/tenant.routes.ts`
+- `src/api/routes/auth.routes.ts`
+- `src/api/routes/user.routes.ts`
+- `src/api/routes/role.routes.ts`
+
+### Work API Routes
+- `src/api/routes/work.routes.ts`
+- `src/api/routes/worker.routes.ts`
+- `src/api/routes/task.routes.ts`
+- `src/api/routes/resource.routes.ts`
+
+### Tool & Analytics API Routes
+- `src/api/routes/tool.routes.ts`
+- `src/api/routes/analytics.routes.ts`
+- `src/api/routes/report.routes.ts`
+- `src/api/routes/audit.routes.ts`
+
+## Database Models
+
+### Core Models
+- `src/models/tenant.model.ts`
+- `src/models/user.model.ts`
+- `src/models/role.model.ts`
+- `src/models/permission.model.ts`
+
+### Work Models
+- `src/models/work.model.ts`
+- `src/models/task.model.ts`
+- `src/models/worker.model.ts`
+- `src/models/playbook.model.ts`
+- `src/models/wbs.model.ts`
+
+### Resource & Tool Models
+- `src/models/resource.model.ts`
+- `src/models/knowledge.model.ts`
+- `src/models/tool.model.ts`
+- `src/models/execution.model.ts`
+
+### Analytics Models
+- `src/models/cost.model.ts`
+- `src/models/value.model.ts`
+- `src/models/metric.model.ts`
+- `src/models/report.model.ts`

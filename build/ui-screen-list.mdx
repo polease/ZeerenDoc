@@ -1,0 +1,370 @@
+# Zeeren Platform UI Tree
+
+## 1. Authentication & Entry Points
+
+- **1.1 Login Page**
+  - Email/Password Form
+  - OAuth Buttons (Google, GitHub)
+  - SSO Provider Entry Points
+  - Forgot Password Link
+  - MFA Configuration/Challenge
+  
+- **1.2 Initial Landing**
+  - Tenant Selection (if user belongs to multiple)
+  - First-time User Onboarding
+  
+## 2. Navigation Structure
+
+- **2.1 Global Header**
+  - Logo/Branding (tenant-configurable)
+  - Main Navigation
+  - Search Bar (global)
+  - User Profile Menu
+  - Notifications Center
+  - Quick Actions Menu
+  
+- **2.2 User Profile Menu**
+  - Profile Settings
+  - Preferences
+  - Theme Selector
+  - Language Selection
+  - Help & Support
+  - Logout
+  
+- **2.3 Notifications Center**
+  - Real-time Updates
+  - Task Assignments
+  - Mentions
+  - Approval Requests
+  - System Alerts
+  
+- **2.4 Main Sidebar**
+  - Home/Dashboard
+  - Work Management
+  - Resources
+  - Worker Management
+  - Tools Registry
+  - Analytics & Reports
+  - Administration (conditional)
+  
+## 3. Dashboards & Home
+
+- **3.1 Platform Admin Dashboard**
+  - Multi-tenant Overview
+  - System Health Metrics
+  - Tenant Usage Comparison
+  - Global Alerts
+  - Recent Account Activities
+  
+- **3.2 Tenant Admin Dashboard**
+  - Tenant Health Summary
+  - Quota Usage Gauges
+  - User Activity Metrics
+  - Plan Status & Limits
+  - Recent Configuration Changes
+  
+- **3.3 User Home Dashboard**
+  - My Tasks Widget
+  - Works I'm Involved In
+  - Recent Resources
+  - Announcements
+  - Quick Create Actions
+  
+- **3.4 Domain Owner Dashboard**
+  - Domain Health Metrics
+  - Playbook Status Summary
+  - Recent Domain Activities
+  - Worker Performance
+  - Tool Usage Statistics
+  
+## 4. Work Management
+
+- **4.1 Work Browser**
+  - Work List/Grid View
+  - Filter Panel (Domain, Status, Priority)
+  - Bulk Actions
+  - Search & Sort Controls
+  
+- **4.2 Work Creation Wizard**
+  - Domain Selection
+  - Playbook Selection
+  - Basic Information Form
+  - Priority & Deadline Settings
+  - Pre-flight Checklist
+  
+- **4.3 Work Detail Views**
+  - **4.3.1 Work Overview**
+    - Status Summary
+    - Progress Metrics
+    - Key Details Panel
+    - Recent Activities
+    - ROI Indicators
+    
+  - **4.3.2 WBS Master Plan**
+    - Hierarchical Tree View
+    - Critical Path Highlight
+    - Milestone Markers
+    - Expand/Collapse Controls
+    
+  - **4.3.3 WBS Micro Plan**
+    - Branch-specific Task Tree
+    - Status Indicators
+    - Assignee Avatars
+    - Dependency Lines
+    
+  - **4.3.4 Task Board**
+    - Kanban View (Status Columns)
+    - Gantt View (Timeline)
+    - Card Sorting & Filtering
+    - Drag-and-Drop Controls
+    
+  - **4.3.5 Resource Tree**
+    - Folder/File Structure
+    - Preview Panel
+    - Upload Controls
+    - Version History
+    - Search & Filter
+    
+  - **4.3.6 Work Canvas**
+    - Zoomable Infinite Canvas
+    - Resource Nodes
+    - Connection Lines
+    - Collaboration Indicators
+    - Annotation Tools
+    
+## 5. Task Management
+
+- **5.1 Task Inbox**
+  - My Tasks List
+  - Priority Indicators
+  - Due Date Highlights
+  - Status Filters
+  - Claim/Delegate Controls
+  
+- **5.2 Task Detail View**
+  - Description & Requirements
+  - Steps & Instructions
+  - Input Resources
+  - Tool References
+  - Acceptance Criteria
+  
+- **5.3 Task Execution**
+  - **5.3.1 Human Task Interface**
+    - Form Components
+    - Resource Viewer/Editor
+    - Action Buttons
+    - Notes & Comments
+    
+  - **5.3.2 Agent Task Monitor**
+    - Real-time Execution Stream
+    - Reasoning Steps Display
+    - Tool Call Logs
+    - Intervention Controls
+    
+- **5.4 Task Chat & Collaboration**
+  - Message Thread
+  - File Attachments
+  - @Mentions
+  - Voice Note Recorder
+  - Code Block Support
+  
+## 6. Resource Management
+
+- **6.1 Resource Browser**
+  - Hierarchical Tree
+  - Grid/List Toggle
+  - Search & Filters
+  - Tag Management
+  
+- **6.2 Resource Viewer/Editor**
+  - Preview Panel
+  - Edit Controls
+  - Version Comparison
+  - Sharing Options
+  
+- **6.3 Knowledge Base**
+  - Search Interface
+  - Category Navigation
+  - Tag Filters
+  - Relevance Indicators
+  
+## 7. Worker Management
+
+- **7.1 Worker Directory**
+  - List/Grid View
+  - Type Filters (Human/Agent)
+  - Skill Search
+  - Availability Status
+  
+- **7.2 Human Worker Profile**
+  - Details & Contact
+  - Skills & Competencies
+  - Availability Calendar
+  - Performance Metrics
+  - Task History
+  
+- **7.3 Agent Worker Profile**
+  - LLM Configuration
+  - System Prompt Editor
+  - Tool Permissions
+  - Performance Metrics
+  - Version History
+  
+- **7.4 Agent Testing Sandbox**
+  - Sample Task Creator
+  - Real-time Execution
+  - Debug Controls
+  - Performance Analysis
+  
+## 8. Tool Registry
+
+- **8.1 Tool Browser**
+  - List/Grid View
+  - Category Filters
+  - Status Indicators
+  - Permission Summary
+  
+- **8.2 Tool Configuration**
+  - Basic Details
+  - Endpoint Configuration
+  - Authentication Settings
+  - Input/Output Schema
+  
+- **8.3 Tool Testing**
+  - Input Form
+  - Execute Button
+  - Response Viewer
+  - Error Diagnostics
+  
+- **8.4 Tool Permissions**
+  - Worker Access Matrix
+  - Role-based Rules
+  - Usage Quotas
+  - Audit Log
+  
+## 9. Analytics & Reporting
+
+- **9.1 Work Progress Reports**
+  - Status Distributions
+  - Timeline Charts
+  - Burndown Graphs
+  - Critical Path Analysis
+  
+- **9.2 ROI Dashboard**
+  - Cost Tracking Metrics
+  - Value Capture KPIs
+  - Comparison Views
+  - Threshold Alerts
+  
+- **9.3 Resource Analytics**
+  - Storage Usage
+  - Access Patterns
+  - Growth Trends
+  - Cleanup Recommendations
+  
+- **9.4 Agent Performance**
+  - Efficiency Metrics
+  - Token Usage
+  - Success Rates
+  - Tool Usage Patterns
+  
+- **9.5 Custom Report Builder**
+  - Data Source Selection
+  - Chart Type Picker
+  - Filter Configuration
+  - Export Controls
+  
+## 10. Administration
+
+- **10.1 System Administration** (Platform Admin)
+  - **10.1.1 Tenant Management**
+    - Tenant List
+    - Creation Form
+    - Edit/Suspend Controls
+    - Quota Management
+    
+  - **10.1.2 Global Settings**
+    - System Policies
+    - Default Templates
+    - Maintenance Controls
+    - Notification Rules
+    
+- **10.2 Tenant Administration** (Tenant Admin)
+  - **10.2.1 User Management**
+    - User Directory
+    - Invite Form
+    - Bulk Import
+    - Status Controls
+    
+  - **10.2.2 Role Management**
+    - Role List
+    - Permission Editor
+    - Role Assignment
+    - Role Request Approvals
+    
+  - **10.2.3 Tenant Settings**
+    - Branding Configuration
+    - SSO Configuration
+    - Feature Toggles
+    - Quota Monitoring
+    
+- **10.3 Audit & Compliance**
+  - Audit Log Viewer
+  - Activity Timeline
+  - Filter Controls
+  - Export Functions
+  
+- **10.4 Domain Administration** (Domain Owner)
+  - **10.4.1 Playbook Management**
+    - Playbook List
+    - Process Editor
+    - Role Matrix
+    - Tool Allowances
+    
+  - **10.4.2 SOP Management**
+    - Document Import
+    - Knowledge Mapping
+    - Injection Rules
+    - Version Control
+
+## 11. Standalone Tools
+
+- **11.1 Work Canvas Editor**
+  - Fullscreen Mode
+  - Collaboration Tools
+  - Resource Integration
+  - Export Options
+  
+- **11.2 Mobile Task App**
+  - Task List
+  - Notification Feed
+  - Quick Actions
+  - Offline Mode
+
+## 12. Modals & Overlays
+
+- **12.1 Common Modals**
+  - Confirmation Dialogs
+  - Selection Pickers
+  - Form Wizards
+  - Upload Dialogs
+  
+- **12.2 Notifications & Alerts**
+  - Toast Messages
+  - Alert Banners
+  - Progress Indicators
+  - System Announcements
+
+## 13. Documentation & Help
+
+- **13.1 In-app Help**
+  - Contextual Help Panels
+  - Feature Tours
+  - Video Tutorials
+  - FAQ Sections
+  
+- **13.2 Support Resources**
+  - Knowledge Base
+  - Ticket System
+  - Chat Support
+  - Community Forums

@@ -1,0 +1,623 @@
+# Enterprise Agent Planning Platform - Domain Organization
+
+## 1. Platform Management
+
+Core platform configuration and management interfaces:
+
+```typescript
+interface Tenant {
+  id: string;
+  name: string;
+  status: TenantStatus;
+  planId: string;
+  customBranding?: object;
+  quotas: TenantQuota[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface TenantQuota {
+  quotaType: QuotaType;
+  limit: number;
+  used: number;
+  softLimitPercentage?: number;
+  resetPeriod?: ResetPeriod;
+  lastResetAt?: Date;
+}
+
+interface AuditLogEntry {
+  id: string;
+  tenantId: string;
+  userId?: string;
+  workerId?: string;
+  actionType: ActionType;
+  resource: string;
+  resourceId?: string;
+  details: object;
+  ipAddress?: string;
+  timestamp: Date;
+}
+
+enum TenantStatus {
+  Active = 'ACTIVE',
+  Suspended = 'SUSPENDED',
+  Deactivated = 'DEACTIVATED',
+  TrialPeriod = 'TRIAL_PERIOD'
+}
+
+enum QuotaType {
+  Storage = 'STORAGE',
+  LLMTokens = 'LLM_TOKENS',
+  AgentRuntime = 'AGENT_RUNTIME',
+  HumanUsers = 'HUMAN_USERS',
+  AgentWorkers = 'AGENT_WORKERS',
+  APIRequests = 'API_REQUESTS'
+}
+
+enum ResetPeriod {
+  Daily = 'DAILY',
+  Weekly = 'WEEKLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  Never = 'NEVER'
+}
+
+enum ActionType {
+  Create = 'CREATE',
+  Read = 'READ',
+  Update = 'UPDATE',
+  Delete = 'DELETE',
+  Login = 'LOGIN',
+  Logout = 'LOGOUT',
+  Export = 'EXPORT',
+  Import = 'IMPORT',
+  Execute = 'EXECUTE'
+}
+```
+
+## 2. Tenant Setup
+
+User management, roles, and permissions:
+
+```typescript
+interface User {
+  id: string;
+  tenantId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  status: UserStatus;
+  roles: Role[];
+  createdAt: Date;
+  updatedAt: Date;
+  lastLoginAt?: Date;
+}
+
+interface Role {
+  id: string;
+  name: string;
+  description: string;
+  permissions: Permission[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface Permission {
+  resource: string;
+  action: string;
+  constraints?: object;
+}
+
+enum UserStatus {
+  Active = 'ACTIVE',
+  Inactive = 'INACTIVE',
+  Invited = 'INVITED',
+  Suspended = 'SUSPENDED'
+}
+```
+
+## 3. Work Lifecycle Management
+
+Work domains, playbooks, and work definitions:
+
+```typescript
+interface WorkDomain {
+  id: string;
+  name: string;
+  description: string;
+  domainTags: string[];
+  playbooks: Playbook[];
+  resourceTree?: ResourceTree;
+  owner: User;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface Playbook {
+  id: string;
+  name: string;
+  description: string;
+  version: string;
+  workDomainId: string;
+  workProcesses: WorkProcess[];
+  workerRoles: WorkerRole[];
+  tools: ToolReference[];
+  resourceTemplate: ResourceTemplate[];
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface Work {
+  id: string;
+  name: string;
+  description: string;
+  workDomainId: string;
+  playbookId: string;
+  playbookVersion: string;
+  status: WorkStatus;
+  priority: Priority;
+  wbs: WBS;
+  requestor: User;
+  assignedWorkers: Worker[];
+  startDate: Date;
+  dueDate?: Date;
+  completedDate?: Date;
+  roi: ROIMetrics;
+  resourceTree: ResourceTree;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface WorkProcess {
+  id: string;
+  name: string;
+  description: string;
+  steps: WorkStep[];
+  playbookId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface WorkStep {
+  id: string;
+  name: string;
+  description: string;
+  order: number;
+  assignedRole: string;
+  inputResources: ResourceReference[];
+  outputResources: ResourceReference[];
+  tools: ToolReference[];
+  dependsOn: string[]; // IDs of steps this depends on
+  estimatedDuration: number; // in minutes
+  isParallel: boolean;
+}
+
+enum WorkStatus {
+  Draft = 'DRAFT',
+  Planning = 'PLANNING',
+  InProgress = 'IN_PROGRESS',
+  Paused = 'PAUSED',
+  Completed = 'COMPLETED',
+  Cancelled = 'CANCELLED'
+}
+
+enum Priority {
+  Low = 'LOW',
+  Medium = 'MEDIUM',
+  High = 'HIGH',
+  Critical = 'CRITICAL'
+}
+```
+
+## 4. Work Engine & Execution
+
+Work breakdown structure and task management:
+
+```typescript
+interface WBS {
+  id: string;
+  workId: string;
+  rootNodes: WBSNode[];
+  createdAt: Date;
+  updatedAt: Date;
+  status: WBSStatus;
+  lastReplanAt?: Date;
+}
+
+interface WBSNode {
+  id: string;
+  name: string;
+  description: string;
+  status: TaskStatus;
+  assignedWorker?: Worker;
+  parentId?: string;
+  children: WBSNode[];
+  inputResources: ResourceReference[];
+  outputResources: ResourceReference[];
+  tools: ToolReference[];
+  startDate?: Date;
+  dueDate?: Date;
+  completedDate?: Date;
+  estimatedDuration: number; // in minutes
+  actualDuration?: number; // in minutes
+  priority: Priority;
+  dependencies: string[]; // IDs of nodes this depends on
+  pdcaLog: PDCAEntry[];
+}
+
+interface Task {
+  id: string;
+  name: string;
+  description: string;
+  steps: string[]; // Step-by-step instructions
+  acceptanceCriteria: string[];
+  assignedWorker: Worker;
+  status: TaskStatus;
+  wbsNodeId: string;
+  workId: string;
+  startDate?: Date;
+  dueDate?: Date;
+  completedDate?: Date;
+  priority: Priority;
+  inputResources: ResourceReference[];
+  outputResources: ResourceReference[];
+  tools: ToolReference[];
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface PDCAEntry {
+  id: string;
+  wbsNodeId: string;
+  phase: PDCAPhase;
+  content: string;
+  createdBy: string;
+  createdAt: Date;
+  metrics?: object;
+}
+
+enum WBSStatus {
+  Draft = 'DRAFT',
+  Active = 'ACTIVE',
+  Completed = 'COMPLETED',
+  Replanning = 'REPLANNING'
+}
+
+enum TaskStatus {
+  Todo = 'TODO',
+  InProgress = 'IN_PROGRESS',
+  Blocked = 'BLOCKED',
+  Review = 'REVIEW',
+  Completed = 'COMPLETED',
+  Cancelled = 'CANCELLED'
+}
+
+enum PDCAPhase {
+  Plan = 'PLAN',
+  Do = 'DO',
+  Check = 'CHECK',
+  Act = 'ACT'
+}
+```
+
+## 5. Worker & Agent Framework
+
+Human and AI worker management:
+
+```typescript
+interface Worker {
+  id: string;
+  name: string;
+  title: string;
+  workerType: WorkerType;
+  skills: Skill[];
+  availability: Availability;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface HumanWorker extends Worker {
+  workerType: WorkerType.Human;
+  userId?: string; // Optional link to user account
+  email?: string;
+  avatar?: string;
+  notificationPreferences: NotificationPreference[];
+  delegationRules?: DelegationRule[];
+  performanceMetrics: PerformanceMetrics;
+}
+
+interface AgentWorker extends Worker {
+  workerType: WorkerType.Agent;
+  llmProvider: string;
+  llmModel: string;
+  systemMessage: string;
+  toolsAllowed: string[]; // Tool IDs this agent can use
+  costBudget: number;
+  inputSchema?: object;
+  outputSchema?: object;
+  profileVersion: number;
+}
+
+interface WorkerRole {
+  id: string;
+  name: string;
+  description: string;
+  defaultWorkerType: WorkerType;
+  requiredSkills: string[];
+  toolPermissions: ToolReference[];
+  playbookId: string;
+}
+
+interface Skill {
+  name: string;
+  proficiency: ProficiencyLevel;
+  endorsed?: boolean;
+}
+
+interface Availability {
+  schedule: ScheduleEntry[];
+  timezone: string;
+  maxConcurrentTasks: number;
+}
+
+interface ScheduleEntry {
+  dayOfWeek: number; // 0-6, 0 is Sunday
+  startTime: string; // "HH:MM" format
+  endTime: string; // "HH:MM" format
+  isAvailable: boolean;
+}
+
+interface NotificationPreference {
+  channel: NotificationChannel;
+  eventTypes: NotificationEventType[];
+  isEnabled: boolean;
+  destination?: string; // Email, Slack webhook, etc.
+}
+
+interface DelegationRule {
+  id: string;
+  startDate: Date;
+  endDate: Date;
+  delegateToWorkerId: string;
+  reason?: string;
+  taskFilter?: object; // Optional filter for which tasks to delegate
+}
+
+interface PerformanceMetrics {
+  completionRate: number;
+  onTimeRate: number;
+  qualityScore: number;
+  averageTaskDuration: number;
+  lastUpdatedAt: Date;
+}
+
+enum WorkerType {
+  Human = 'HUMAN',
+  Agent = 'AGENT'
+}
+
+enum ProficiencyLevel {
+  Beginner = 'BEGINNER',
+  Intermediate = 'INTERMEDIATE',
+  Advanced = 'ADVANCED',
+  Expert = 'EXPERT'
+}
+
+enum NotificationChannel {
+  Email = 'EMAIL',
+  Browser = 'BROWSER',
+  Mobile = 'MOBILE',
+  Slack = 'SLACK'
+}
+
+enum NotificationEventType {
+  TaskAssigned = 'TASK_ASSIGNED',
+  TaskStatusChanged = 'TASK_STATUS_CHANGED',
+  TaskComment = 'TASK_COMMENT',
+  WorkCompleted = 'WORK_COMPLETED',
+  Mention = 'MENTION',
+  Escalation = 'ESCALATION',
+  ROIAlert = 'ROI_ALERT',
+  RiskAlert = 'RISK_ALERT'
+}
+```
+
+## 6. Resource & Knowledge Management
+
+Resource management and organization:
+
+```typescript
+interface ResourceTree {
+  id: string;
+  name: string;
+  workId?: string; // Optional - could be domain-level tree
+  workDomainId?: string;
+  rootNodes: ResourceNode[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ResourceNode {
+  id: string;
+  name: string;
+  nodeType: ResourceNodeType;
+  parentId?: string;
+  children?: ResourceNode[];
+  resource?: Resource;
+  tags: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface Resource {
+  id: string;
+  name: string;
+  description?: string;
+  resourceType: ResourceType;
+  contentType: string;
+  channel: StorageChannel;
+  location: string; // Path or URL
+  size?: number;
+  versions: ResourceVersion[];
+  metadata: object;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ResourceVersion {
+  id: string;
+  resourceId: string;
+  versionNumber: number;
+  location: string;
+  size: number;
+  author: string;
+  comment?: string;
+  createdAt: Date;
+}
+
+interface ResourceReference {
+  resourceId: string;
+  role: string; // e.g., "input", "output", "reference"
+  required: boolean;
+}
+
+interface ResourceTemplate {
+  path: string; // e.g., "1_Problem_Definition/Problem_Statement.md"
+  type: ResourceType;
+  contentType: string;
+  isRequired: boolean;
+  defaultContent?: string;
+}
+
+enum ResourceNodeType {
+  Folder = 'FOLDER',
+  File = 'FILE',
+  Link = 'LINK'
+}
+
+enum ResourceType {
+  Document = 'DOCUMENT',
+  Image = 'IMAGE',
+  Code = 'CODE',
+  Data = 'DATA',
+  Archive = 'ARCHIVE',
+  Other = 'OTHER'
+}
+
+enum StorageChannel {
+  EAPStore = 'EAP_STORE',
+  LocalFile = 'LOCAL_FILE',
+  HTTP = 'HTTP',
+  Database = 'DATABASE',
+  ExternalService = 'EXTERNAL_SERVICE'
+}
+```
+
+## 7. Tool Registry & Execution
+
+Tools and integrations:
+
+```typescript
+interface Tool {
+  id: string;
+  name: string;
+  description: string;
+  toolType: ToolType;
+  endpoint?: string;
+  authMethod?: AuthMethod;
+  authConfig?: object;
+  inputSchema?: object;
+  outputSchema?: object;
+  rateLimit?: number;
+  timeout?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface ToolReference {
+  toolId: string;
+  permissions: ToolPermission[];
+}
+
+enum ToolType {
+  API = 'API',
+  Browser = 'BROWSER',
+  FileOperation = 'FILE_OPERATION',
+  Database = 'DATABASE',
+  LLM = 'LLM',
+  VectorDB = 'VECTOR_DB',
+  Shell = 'SHELL',
+  Custom = 'CUSTOM'
+}
+
+enum ToolPermission {
+  Read = 'READ',
+  Write = 'WRITE',
+  Execute = 'EXECUTE'
+}
+
+enum AuthMethod {
+  None = 'NONE',
+  APIKey = 'API_KEY',
+  OAuth2 = 'OAUTH2',
+  BasicAuth = 'BASIC_AUTH',
+  JWT = 'JWT',
+  Custom = 'CUSTOM'
+}
+```
+
+## 8. ROI & Governance Dashboard
+
+Return on investment tracking:
+
+```typescript
+interface ROIMetrics {
+  id: string;
+  workId: string;
+  costs: Cost[];
+  values: Value[];
+  calculatedROI: number;
+  lastUpdatedAt: Date;
+}
+
+interface Cost {
+  id: string;
+  category: CostCategory;
+  amount: number;
+  currency: string;
+  description?: string;
+  taskId?: string;
+  workerId?: string;
+  toolId?: string;
+  timestamp: Date;
+}
+
+interface Value {
+  id: string;
+  category: ValueCategory;
+  amount: number;
+  currency: string;
+  description?: string;
+  taskId?: string;
+  timestamp: Date;
+}
+
+enum CostCategory {
+  LLMTokens = 'LLM_TOKENS',
+  ToolInvocation = 'TOOL_INVOCATION',
+  AgentRuntime = 'AGENT_RUNTIME',
+  HumanLabor = 'HUMAN_LABOR',
+  MaterialPurchase = 'MATERIAL_PURCHASE',
+  Other = 'OTHER'
+}
+
+enum ValueCategory {
+  Revenue = 'REVENUE',
+  CostSaving = 'COST_SAVING',
+  ProductivityGain = 'PRODUCTIVITY_GAIN',
+  DeliverableOutput = 'DELIVERABLE_OUTPUT',
+  Other = 'OTHER'
+}
+```
